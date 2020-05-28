@@ -1,6 +1,6 @@
 ## 集成 SDK
 
-本文主要介绍如何快速的将腾讯云 TEduBoard SDK 集成到您的项目中。
+本文主要介绍如何快速的将腾讯云 TEduBoard SDK 集成到您的项目中。如果您使用互动课堂方案，请前往[互动课堂集成文档](https://github.com/tencentyun/TIC/blob/master/Android/%E6%8E%A5%E5%85%A5%E6%96%87%E6%A1%A3.md)。
 
 ## 开发环境
 
@@ -86,44 +86,7 @@ dependencies {
 
 ## 使用 TEduBoard SDK
 
-#### 1. 初始化 SDK
-
-继承 Application ，并在 onCreate 生命周期里初始化。如果您的 App 使用了多进程，注意在主进程进行操作，避免重复初始化。
-
-```java
-
-private TICManager mTIC;
-...
-
-public void onCreate() {
-        super.onCreate();
-
-        if (isMainProcess(...)) {    // 仅在主线程初始化
-            // 初始化TIC
-            mTIC = TICManager.getInstance();
-            mTIC.init(this, sdkAppId);
-        }
-}
-```
-
-然后在 AndroidManifest.xml文件中，使用以上定义的Application。
-
-``` xml 
-<application
-        android:name="您定义的Application类"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_icon"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        
-        ....
-
-</application>
-
-```
-
-#### 2. 创建白板控制器
+#### 1. 创建白板控制器
 
 使用如下代码创建并初始化白板控制器：
 
@@ -135,14 +98,21 @@ TEduBoardController.TEduBoardAuthParam authParam = new TEduBoardController.TEduB
 //（2）白板默认配置
 TEduBoardController.TEduBoardInitParam initParam = new TEduBoardController.TEduBoardInitParam(); 
 mBoard = new TEduBoardController(context);
-mBoard.init(authParam, classId, initParam);
+
 //（3）添加白板事件回调
 mBoard.addCallback(callback);
+
+//（4）进行初始化
+mBoard.init(authParam, classId, initParam);
+
 ```
 
 其中 `sdkAppId`、`userId`、`userSig`、`classId`为需要您自己填写的参数。
 
-#### 3. 白板窗口获取及显示
+注意事项
+请在主进程中执行初始化操作，如果您的 App 使用了多进程，请注意注意避免重复初始化。
+
+#### 2. 白板窗口获取及显示
 在 `onTEBInit`  回调方法内，使用如下代码获取并显示白板视图：
 
 ```java
@@ -164,7 +134,7 @@ container.addView(boardview, layoutParams);
 
 SDK 所有回调都在主线程内执行，因此可以在回调里直接执行 UI 操作。
 
-#### 4. 白板数据同步
+#### 3. 白板数据同步
 
 白板在使用过程中，需要在不同的用户之间进行数据同步（涂鸦数据等），SDK 支持两种不同的数据同步模式。
 
@@ -268,7 +238,7 @@ mBoard.addSyncData(data);
 >! 实时录制功能在自定义数据通道模式下不可用
 
 
-#### 5. 销毁白板
+#### 4. 销毁白板
 
 调用 `unInit` 方法后，内部将彻底销毁白板并停止计费，请您确保此接口的调用。
 
