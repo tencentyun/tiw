@@ -1,6 +1,6 @@
 ## 集成 SDK
 
-本文主要介绍如何快速的将腾讯云 TEduBoard SDK 集成到您的项目中。如果您使用互动课堂方案，请前往[互动课堂集成文档](https://github.com/tencentyun/TIC/blob/master/Android/%E6%8E%A5%E5%85%A5%E6%96%87%E6%A1%A3.md)。
+本文主要介绍如何快速的将腾讯云 TEduBoard SDK 集成到您的项目中。如果您使用互动课堂方案，请前往 [互动课堂集成文档](https://github.com/tencentyun/TIC/blob/master/Android/%E6%8E%A5%E5%85%A5%E6%96%87%E6%A1%A3.md) 。
 
 ## 开发环境
 
@@ -10,7 +10,7 @@
 
 ## 集成 TEduBoard SDK
 
-您可以选择使用 Gradle 自动加载的方式，或者手动下载 aar 再将其导入到您当前的工程项目中。由于TEduBoard SDK 内部使用 TIMSDK 作为内部信令通道，您还需自动或手动添加 TIMSDK 依赖项。
+您可以选择使用 Gradle 自动加载的方式，或者手动下载 aar 再将其导入到您当前的工程项目中。由于 TEduBoard SDK  内部使用 TIMSDK 作为内部信令通道，您还需自动或手动添加 TIMSDK 依赖项。
 
 
 
@@ -39,7 +39,7 @@ dependencies {
 
 #### 1. 下载 SDK
 
-单击下载最新版 [TEduBaord SDK](https://tic-res-1259648581.cos.ap-shanghai.myqcloud.com/sdk/Android.zip)。前往 [即时通讯官网](https://cloud.tencent.com/document/product/269/36887) 下载 TIMSDK。
+单击下载最新版 [TEduBaord SDK](https://tic-res-1259648581.cos.ap-shanghai.myqcloud.com/sdk/Android.zip) 。前往 [即时通讯官网](https://cloud.tencent.com/document/product/269/36887) 下载 TIMSDK。
 
 
 #### 2. 导入 SDK
@@ -199,7 +199,7 @@ TIMSdkConfig timSdkConfig = new TIMSdkConfig(appId)
 TIMManager.getInstance().init(context, timSdkConfig);
 ```
 
-如果您有其他业务使用了 IMSDK 并期望 IMSDK 的生命周期与 APP 的生命周期保持一致，请在 Application 的 onCreate 方法中初始化 IMSDK，否则请在登录前初始化 IMSDK，在登出后反初始化 IMSDK。
+如果您有其他业务使用了 IMSDK 并期望 IMSDK 的生命周期与 App 的生命周期保持一致，请在 Application 的 onCreate 方法中初始化 IMSDK，否则请在登录前初始化 IMSDK，在登出后反初始化 IMSDK 。
 
 步骤二、登录 IMSDK
 
@@ -219,7 +219,7 @@ TIMGroupManager.getInstance().login(userId, userSig, new TIMCallBack() {
 
 步骤三、加入群组
 
-登陆 IMSDK 成功后加入白板所在的群组。
+登录 IMSDK 成功后加入白板所在的群组。
 
 ```java
 TIMGroupManager.getInstance().applyJoinGroup(groupId, desc + groupId, new TIMCallBack() {
@@ -285,7 +285,7 @@ mBoard.addSyncData(data);
 mBoard.uninit();
 ```
 
-如果您使用IMSDK作为信令通道，请根据业务的需要决定是否退出群组、退出登陆并反初始化。
+如果您使用 IMSDK 作为信令通道，请根据业务的需要决定是否退出群组、退出登录并反初始化。
 
 步骤一、退出群组
 
@@ -324,4 +324,5 @@ TIMManager.getInstance().logout(new TIMCallBack() {
 TIMManager.getInstance().unInit();
 ```
 
-如果您有其他业务使用了 IMSDK 并期望 IMSDK 的生命周期与 APP 的生命周期保持一致，无需调用此接口。
+如果您有其他业务使用了 IMSDK 并期望 IMSDK 的生命周期与 App 的生命周期保持一致，无需调用此接口。
+

@@ -760,13 +760,13 @@ TEduBoardTranscodeFileResult 的字段信息主要来自：
 ### addImagesFile
 批量导入图片到白板 
 ``` Javascript
-String addImagesFile(String urls, bool needSwitch)
+String addImagesFile(Array urls, bool needSwitch)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| urls | String | 要使用的背景图片URL列表，编码格式为 UTF8  |
+| urls | Array | 要使用的背景图片URL列表，编码格式为 UTF8，如['https://www.xxx.com/xxxx.jpg', 'https://www.xxx.com/xxxx.jpg']  |
 | needSwitch | bool | Boolean 添加转码文件，是否需要立刻跳转到该文件，默认为 true  |
 
 #### 返回

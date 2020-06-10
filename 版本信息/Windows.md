@@ -1,3 +1,20 @@
+### 2.4.9.115 @2020.06.10
+* [点击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.4.9.115.zip)
+
+- 新增接口
+    - 新增白板同步和刷新接口 SyncAndReload
+    - 新增白板快照接口 Snapshot
+- 新增回调
+    - 新增 onTEBSnapshot 回调
+- 新增错误码
+    - TEDU_BOARD_ERROR_PATH_INVALID  路径非法
+    - TEDU_BOARD_ERROR_WRITE_ERROR 文件写入错误
+- BUG 修复
+    - 修复视频频繁操作导致权限错乱问题
+    - 解决文字工具在底部点击输入无效问题
+    - 修复清空偶现残留问题
+    - 适配IM 4.8.10版本枚举值变化导致消息收发异常问题
+
 ### 2.4.8.108 @2020.05.21
 * [点击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.4.8.108.zip)
 
@@ -18,7 +35,7 @@
 * [点击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.4.7.106.zip)
 
 - BUG 修复
-    - 修复IM信令每次都重复发送一条问题
+    - 修复 IM 信令每次都重复发送一条问题
 - 性能优化
     - 优化房间内其他人涂鸦渲染的流程性
 

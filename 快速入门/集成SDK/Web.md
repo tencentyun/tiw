@@ -42,7 +42,7 @@
 ```
 var initParams = {
   id: domId, // dom节点id
-  classId: classId, // 整数
+  classId: classId, // 课堂 ID，32位整型，取值范围[1, 4294967294]
   sdkAppId: sdkAppId, // 整数
   userId: userId, // 字符串
   userSig: userSig, // 字符串
@@ -52,7 +52,7 @@ var teduBoard = new TEduBoard(initParams);
 
 #### 2. 监听白板关键事件
 
-> 使用on监听白板事件
+> 使用 on 监听白板事件
 
 ```
 // 监听白板错误事件
