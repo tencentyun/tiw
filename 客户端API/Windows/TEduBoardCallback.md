@@ -294,6 +294,18 @@ virtual void onTEBGotoStep(uint32_t currentStep, uint32_t totalStep)
 | totalStep | uint32_t | 当前白板页动画总步数  |
 
 
+### onTEBSnapshot
+白板快照 
+``` C++
+virtual void onTEBSnapshot(const char *path)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| path | const char * | 快照本地路径，编码格式为 UTF8  |
+
+
 
 ## 文件操作回调
 
@@ -358,7 +370,7 @@ virtual void onTEBVideoStatusChanged(const char *fileId, TEduBoardVideoStatus st
 
 
 ### onTEBH5FileStatusChanged
-H5 文件状态回调 
+H5文件状态回调 
 ``` C++
 virtual void onTEBH5FileStatusChanged(const char *fileId, TEduBoardH5FileStatus status)
 ```

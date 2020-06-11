@@ -58,7 +58,7 @@ void init(TEduBoardAuthParam authParam, int roomId, final TEduBoardInitParam ini
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | authParam | TEduBoardAuthParam | 授权参数  |
-| roomId | int | 课堂 ID  |
+| roomId | int | 课堂 ID，32位整型，取值范围[1, 4294967294]  |
 | initParam | final TEduBoardInitParam | 可选参数，指定用于初始化白板的一系列属性值  |
 
 #### 警告
@@ -93,15 +93,6 @@ View getBoardRenderView()
 
 #### 介绍
 在调用此接口获取 View 后，加入到视图树中后，在结束时需要 removeView 
-
-
-### refresh
-刷新当前页白板，触发 onTEBRefresh 回调 
-``` Java
-void refresh()
-```
-#### 警告
-如果当前白板包含PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
 
 
 ### addSyncData
@@ -465,7 +456,7 @@ void setLineStyle(TEduBoardLineStyle style)
 | style | TEduBoardLineStyle | 要设置的直线样式  |
 
 #### 警告
-虚线样式在 Android 4.4及以上版本支持，在4.4以下版本设置虚线样式将使用实线代替 
+虚线样式在android4.4及以上版本支持，在4.4以下版本设置虚线样式将使用实线代替 
 
 
 ### getLineStyle
@@ -783,6 +774,27 @@ int getBoardContentFitMode()
 ```
 #### 返回
 白板内容自适应模式 
+
+
+### refresh
+刷新当前页白板，触发 onTEBRefresh 回调 
+``` Java
+void refresh()
+```
+#### 警告
+如果当前白板包含PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
+
+
+### syncAndReload
+同步本地发送失败的数据到远端并刷新本地数据 
+``` Java
+void syncAndReload()
+```
+#### 警告
+Reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
+
+#### 介绍
+接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制： （1）仅支持2.4.9及以上版本 （2）如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION 
 
 
 
@@ -1137,6 +1149,18 @@ String addH5File(String url)
 
 #### 警告
 只支持展示，不支持互动 
+
+
+### snapshot
+白板快照 
+``` Java
+void snapshot(TEduBoardSnapshotInfo info)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| info | TEduBoardSnapshotInfo | 快照信息  |
 
 
 

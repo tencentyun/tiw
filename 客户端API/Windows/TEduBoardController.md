@@ -166,7 +166,7 @@ virtual void Init(const TEduBoardAuthParam &authParam, uint32_t roomId, const TE
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | authParam | const TEduBoardAuthParam & | 授权参数  |
-| roomId | uint32_t | 课堂 ID  |
+| roomId | uint32_t | 课堂 ID，32位整型，取值范围[1, 4294967294]  |
 | initParam | const TEduBoardInitParam & | 可选参数，指定用于初始化白板的一系列属性值  |
 
 #### 警告
@@ -192,6 +192,18 @@ virtual void Refresh()=0
 ```
 #### 警告
 如果当前白板包含PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
+
+
+### SyncAndReload
+同步本地发送失败的数据到远端并刷新本地数据 
+``` C++
+virtual void SyncAndReload()=0
+```
+#### 警告
+Reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
+
+#### 介绍
+接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制：如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION 
 
 
 ### AddSyncData
@@ -704,7 +716,7 @@ virtual void SetBackgroundImage(const char *url, TEduBoardImageFitMode mode)=0
 | mode | TEduBoardImageFitMode | 要使用的图片填充对齐模式 |
 
 #### 介绍
-当 URL 是一个有效的本地文件地址时，该文件会被自动上传到 COS 
+当URL是一个有效的本地文件地址时，该文件会被自动上传到COS 
 
 
 ### SetBackgroundH5
@@ -976,6 +988,18 @@ virtual TEduBoardContentFitMode GetBoardContentFitMode()=0
 白板内容自适应模式 
 
 
+### Snapshot
+白板快照 
+``` C++
+virtual void Snapshot(const TEduBoardSnapshotInfo &info)=0
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| info | const TEduBoardSnapshotInfo & | 快照信息  |
+
+
 
 ## 文件操作接口
 
@@ -1049,8 +1073,8 @@ virtual const char* AddImagesFile(const char **urls, uint32_t urlCount)=0
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| urls | const char ** | 要使用的图片 UR L列表，编码格式为 UTF8，不允许为 nullptr  |
-| urlCount | uint32_t | 图片 URL 个数  |
+| urls | const char ** | 要使用的图片URL列表，编码格式为UTF8，不允许为nullptr  |
+| urlCount | uint32_t | 图片URL个数  |
 
 #### 返回
 文件 ID 

@@ -147,10 +147,7 @@
 + (NSString *)getVersion
 ```
 #### 返回
-SDK 版本号
-
-#### 介绍
-获取 SDK 版本号 返回值内存由 SDK 内部管理，用户不需要自己释放 
+NSString 版本号字符串 
 
 
 
@@ -771,12 +768,36 @@ SDK 版本号
 
 
 ### refresh
-刷新当前页白板，触发 onRefresh 回调 
+刷新当前页白板，触发 onTEBRefresh 回调 
 ``` Objective-C
 - (void)refresh
 ```
 #### 警告
 如果当前白板包含PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
+
+
+### syncAndReload
+同步本地发送失败的数据到远端并刷新本地数据 
+``` Objective-C
+- (void)syncAndReload
+```
+#### 警告
+Reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
+
+#### 介绍
+接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制： （1）仅支持2.4.9及以上版本 （2）如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION 
+
+
+### snapshot:
+白板快照 
+``` Objective-C
+- (void)snapshot:(TEduBoardSnapshotInfo *)info 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| info | TEduBoardSnapshotInfo * | 快照信息  |
 
 
 

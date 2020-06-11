@@ -1151,3 +1151,50 @@ void refresh()
 #### 警告
 如果当前白板包含PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
 
+
+### addAckData
+确认数据是否发送成功 
+``` Javascript
+void addAckData(Object data)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| data | Object | TEB_SYNCDATA 回调的数据  |
+
+
+### syncAndReload
+同步本地发送失败的数据到远端并刷新本地数据 
+``` Javascript
+Boolean syncAndReload()
+```
+#### 警告
+reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
+
+#### 介绍
+接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制： （1）仅支持2.4.9及以上版本 （2）如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION （3）此接口需要配合 addAckData 一起使用，在白板数据发送成功后，请调用 addAckData 接口完成确认 
+
+
+### snapshot
+白板快照 
+``` Javascript
+void snapshot(TEduBoardSnapshotInfo param)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| param | TEduBoardSnapshotInfo | 快照参数 
+``` 
+{
+   //接口调用--userData透传数据，会在 TEB_SNAPSHOT 事件回调中带回
+   teduBoard.snapshot({userData: '/snapshot/snapshot.png'});
+   //监听事件--image 为 base64格式图片， userdata为透传字段
+   teduBoard.on(TEduBoard.EVENT.TEB_SNAPSHOT, ({image, userData}) => {});
+}
+```
+  |
+
+
+
