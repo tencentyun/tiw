@@ -1,3 +1,11 @@
+### 2.4.9.117 @2020.06.15
+* [点击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.4.9.117.zip)
+
+- 新增接口
+    - 初始化参数新增windowBackgroundColor用于设置非白板区域背景色
+- BUG 修复
+    - AddTranscodeFile接口超时时间改为2000毫秒缓解添加文件超时问题
+
 ### 2.4.9.115 @2020.06.10
 * [点击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.4.9.115.zip)
 
