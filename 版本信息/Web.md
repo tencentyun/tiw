@@ -1,3 +1,17 @@
+### 2.5.0 @ 2020.07.2
+* 链接地址：https://res.qcloudtiw.com/board/2.5.0/TEduBoard.min.js
+
+- 功能变更
+    - addVideoFile/addTranscodeFile/addImagesFile添加已存在文件，返回该文件ID
+    - 统一各个平台视频播放控制栏的界面
+- 功能支持
+    - 支持PPT超链接点击同步功能
+- bug fix
+    - 修复涂鸦过程中擦除涂鸦导致涂鸦不同步问题
+    - 修复视频文件在特定场景下新增多余白板问题
+- 性能优化
+
+
 ### 2.4.9 @ 2020.06.10
 * 链接地址：https://res.qcloudtiw.com/board/2.4.9/TEduBoard.min.js
 

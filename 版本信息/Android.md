@@ -1,3 +1,17 @@
+### 2.5.0.46 @ 2020.07.2
+* [点击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.0.46.zip)
+
+- 功能变更
+    - addVideoFile/addTranscodeFile/addImagesFile添加已存在文件，返回该文件ID
+    - 统一各个平台视频播放控制栏的界面
+- 功能支持
+    - 支持PPT超链接点击同步功能
+- bug fix
+    - 修复在部分 Android 手机点击点播视频无法显示视频控制栏问题
+    - 修复涂鸦过程中擦除涂鸦导致涂鸦不同步问题
+    - 修复视频文件在特定场景下新增多余白板问题
+- 性能优化
+
 ### 2.4.9.32 @ 2020.06.10
 * [点击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.4.9.32.zip)
 
