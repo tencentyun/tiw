@@ -1,4 +1,4 @@
-### 2.4.0.8 @ 2020.07.2
+### 2.5.0.8 @ 2020.07.2
 * [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.5.0.8.zip)
 * [单击下载 SDK（macOS）](https://sdk.qcloudtiw.com/mac/TEduBoard_Mac_2.5.0.8.zip)
 
