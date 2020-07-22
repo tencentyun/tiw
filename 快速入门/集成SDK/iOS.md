@@ -101,8 +101,8 @@ _boardController = [[TEduBoardController alloc] initWithAuthParam:authParam room
 ```objc
 - (void)onTEBHistroyDataSyncCompleted
 {
-  //（1）获取白板 NSView
-  NSView *boardView = [_boardController getBoardRenderView];
+  //（1）获取白板 UIView
+  UIView *boardView = [_boardController getBoardRenderView];
   //（2）设置显示位置和大小
   boardView.frame = CGRectMake(0, 0, width, height);
   //（3）添加到父视图中
