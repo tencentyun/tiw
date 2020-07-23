@@ -748,7 +748,7 @@ String addTranscodeFile(TEduBoardTranscodeFileResult result, bool needSwitch)
 文件 ID 
 
 #### 警告
-当传入文件的 URL 重复时，文件 ID 返回为空字符串 
+当传入文件的 URL 重复时，返回该 URL 对应的文件 ID 
 在收到对应的 TEB_TRANSCODEPROGRESS 回调前，无法用返回的文件 ID 查询到文件信息
 
 #### 介绍
@@ -766,11 +766,14 @@ String addImagesFile(Array urls, bool needSwitch)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| urls | Array | 要使用的背景图片URL列表，编码格式为 UTF8，如['https://www.xxx.com/xxxx.jpg', 'https://www.xxx.com/xxxx.jpg']  |
+| urls | Array | 要使用的背景图片URL列表，编码格式为 UTF8  |
 | needSwitch | bool | Boolean 添加转码文件，是否需要立刻跳转到该文件，默认为 true  |
 
 #### 返回
 新增加文件 Id 
+
+#### 警告
+当传入文件的 URL 重复时，返回该 URL 对应的文件 ID 
 
 
 ### deleteFile
@@ -919,14 +922,15 @@ String addVideoFile(String url)
 文件 ID 
 
 #### 警告
+当传入文件的 URL 重复时，返回该 URL 对应的文件 ID 
 需要引入以下 js 文件 
 ``` 
-<script src="https://resources-tiw.qcloudtrtc.com/board/third/videojs/video.min.js"></script>
-<link href="https://resources-tiw.qcloudtrtc.com/board/third/videojs/video-js.min.css" rel="stylesheet">
+<script src="https://resources-tiw.qcloudtrtc.com/board/third/videojs/1.0.0/video.min.js"></script>
+<link href="https://resources-tiw.qcloudtrtc.com/board/third/videojs/1.0.0/video-js.min.css" rel="stylesheet">
 ```
  
 
->? 支持 mp4/m3u8/hls；触发状态改变回调 TEB_VIDEO_STATUS_CHANGED。 
+>? 支持 mp4/m3u8/hls；触发状态改变回调 TEB_VIDEO_STATUS_CHANGED 
 
 
 ### addVODFile
@@ -1109,7 +1113,7 @@ void addImageElement(String url)
 | url | String | 【必填】要设置的图片元素 URL，编码格式为 UTF8 |
 
 #### 介绍
-除了设置一个在线图片为图片元素外，您也可以选择上传一个本地图片作为图片元素，此时 url参数可以传一个 Object 类型，格式如下： 
+除了设置一个在线图片为图片元素外，您也可以选择上传一个本地图片作为图片元素，此时 url 参数可以传一个 Object 类型，格式如下： 
 ``` 
 {
    data: document.getElementById('uploadFile').files[0], //取自 input 标签的 fileObject 对象
@@ -1149,7 +1153,7 @@ Boolean isHandwritingEnable()
 void refresh()
 ```
 #### 警告
-如果当前白板包含PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
+如果当前白板包含 PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
 
 
 ### addAckData

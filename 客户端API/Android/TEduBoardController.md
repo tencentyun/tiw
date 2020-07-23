@@ -456,7 +456,7 @@ void setLineStyle(TEduBoardLineStyle style)
 | style | TEduBoardLineStyle | 要设置的直线样式  |
 
 #### 警告
-虚线样式在android4.4及以上版本支持，在4.4以下版本设置虚线样式将使用实线代替 
+虚线样式在 Android 4.4及以上版本支持，在4.4以下版本设置虚线样式将使用实线代替 
 
 
 ### getLineStyle
@@ -502,7 +502,7 @@ void setBackgroundImage(String url, int mode)
 | mode | int | 要使用的图片填充对齐模式 |
 
 #### 介绍
-当 URL 是一个有效的本地文件地址时，该文件会被自动上传到 COS。 当 URL 是一个网络地址时，默认支持 HTTPS 协议的链接。 在Android5.0以下，默认是采用的MIXED_CONTENT_ALWAYS_ALLOW模式，即总是允许WebView同时加载 HTTPS 和 HTTP； 而从Android5.0开始，默认用MIXED_CONTENT_NEVER_ALLOW模式，即总是不允许WebView同时加载 HTTPS 和 HTTP。 您可以在 getBoardRenderView 获得白板渲染视图控件时， 通过 WebSettings 自行进行设置，如下： WebSettings settings = (WebView) mWebView.getSettings(); if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) { settings.setMixedContentMode(0); } 对于 Android P 以上系统，限制了明文流量的网络请求,非加密的流量请求都会被系统禁止掉，可以参考以下方法解决：
+当 URL 是一个有效的本地文件地址时，该文件会被自动上传到 COS。 当 URL 是一个网络地址时，默认支持 HTTPS 协议的链接。 在 Android 5.0以下，默认是采用的 MIXED_CONTENT_ALWAYS_ALLOW 模式，即总是允许 WebView 同时加载 HTTPS 和 HTTP； 而从 Android 5.0开始，默认用 MIXED_CONTENT_NEVER_ALLOW 模式，即总是不允许 WebView 同时加载 HTTPS 和 HTTP。 您可以在 getBoardRenderView 获得白板渲染视图控件时， 通过 WebSettings 自行进行设置，如下： WebSettings settings = (WebView) mWebView.getSettings(); if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) { settings.setMixedContentMode(0); } 对于 Android P 以上系统，限制了明文流量的网络请求，非加密的流量请求都会被系统禁止掉，可以参考以下方法解决：
 
 
 ### setBackgroundH5
@@ -740,7 +740,7 @@ void setBoardScale(int scale)
 | scale | int | 要设置的白板缩放比例 |
 
 #### 介绍
-支持范围: [100，300]，实际缩放比为: scale/100 
+支持范围: [100，1600]，实际缩放比为: scale/100 
 
 
 ### getBoardScale
@@ -814,6 +814,9 @@ String addImagesFile(List< String > urls)
 #### 返回
 新增加文件 Id 
 
+#### 警告
+当传入文件的 URL 重复时，返回 URL 对应的 文件 ID 
+
 
 ### applyFileTranscode
 发起文件转码请求 
@@ -855,19 +858,20 @@ void getFileTranscodeProgress(final String taskId)
 ### addTranscodeFile
 添加转码文件 
 ``` Java
-String addTranscodeFile(final TEduBoardTranscodeFileResult result)
+String addTranscodeFile(final TEduBoardTranscodeFileResult result, boolean needSwitch)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | result | final TEduBoardTranscodeFileResult | 文件转码结果  |
+| needSwitch | boolean | 是否切换到该文件  |
 
 #### 返回
 文件 ID 
 
 #### 警告
-当传入文件的 URL 重复时，文件 ID 返回为空字符串 
+当传入文件的 URL 重复时，返回 URL 对应的 文件 ID 
 在收到对应的 onTEBAddTranscodeFile 回调前，无法用返回的文件 ID 查询到文件信息 
 
 #### 介绍
@@ -1028,6 +1032,7 @@ String addVideoFile(String url)
 文件 ID 
 
 #### 警告
+当传入文件的 URL 重复时，返回 URL 对应的 文件 ID 
 在 TBS 环境下，受限于 X5 内核和视频资源I帧间隔，在 Android 平台下无法精准同步。例如：10秒的视频，I帧间隔5秒，seek 到4秒位置，在 TBS 上从0秒开始播放。 移动端支持 mp4/m3u8，桌面端支持 mp4/m3u8/flv/rtmp；触发状态改变回调 onTEBVideoStatusChange 
 
 

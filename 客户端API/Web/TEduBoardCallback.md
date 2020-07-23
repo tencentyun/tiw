@@ -379,7 +379,7 @@ function TEB_FILEUPLOADPROGRESS(Object data)
 | data | Object | 进度相关信息 |
 
 #### 介绍
-data参数格式如下： 
+data 参数格式如下： 
 ``` 
 {
      loaded: 50,     //已经上传的文件部分大小，以字节（bytes）为单位
@@ -417,20 +417,21 @@ function TEB_VIDEO_STATUS_CHANGED(Object data)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| data | Object | 回调数据 data参数格式如下： 
+| data | Object | 回调数据 data 参数格式如下：  |
+
 ``` 
    {
-        fileId: '',     //文件ID
+        fileId: '',     //文件 ID
         status: 1,      //文件状态 TEduBoardH5FileStatus
    }
 
   
    只有本地调用 addH5File 时会收到该回调
-  /
+  
 function TEB_H5FILE_STATUS_CHANGED(Object data);
 
 ```
-  |
+ 
 
 
 
