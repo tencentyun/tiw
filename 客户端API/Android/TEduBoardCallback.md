@@ -362,4 +362,18 @@ void onTEBSnapshot(final String path, int code, final String msg)
 | msg | final String | 错误信息  |
 
 
+### onTEBH5PPTStatusChanged
+ppt状态改变回调 
+``` Java
+void onTEBH5PPTStatusChanged(final int statusCode, final String fid, final String describeMsg)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| statusCode | final int | 状态码  |
+| fid | final String | 文件fid  |
+| describeMsg | final String | 事件描述信息  |
+
+
 

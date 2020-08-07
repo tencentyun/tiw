@@ -362,4 +362,18 @@ H5 文件状态回调
 文件加载完成后会触发该回调 
 
 
+### onTEBH5PPTStatusChanged:status:message:
+H5PPT 文件状态改变回调 
+``` Objective-C
+- (void)onTEBH5PPTStatusChanged:(NSString *)fileId status:(TEduBoardH5PPTStatus)status message:(NSString *)message 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| fileId | NSString * | 文件 ID  |
+| status | TEduBoardH5PPTStatus | 文件状态  |
+| message | NSString * | 状态消息  |
+
+
 

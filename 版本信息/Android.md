@@ -1,3 +1,9 @@
+### 2.5.2.48 @ 2020.08.07
+* [点击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.2.48.zip)
+
+- 新增回调
+    - 新增H5PPT状态回调 onTEBH5PPTStatusChanged
+    
 ### 2.5.1.47 @ 2020.07.23
 * [点击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.1.47.zip)
 

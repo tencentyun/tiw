@@ -370,7 +370,7 @@ virtual void onTEBVideoStatusChanged(const char *fileId, TEduBoardVideoStatus st
 
 
 ### onTEBH5FileStatusChanged
-H5 文件状态回调 
+H5文件状态回调 
 ``` C++
 virtual void onTEBH5FileStatusChanged(const char *fileId, TEduBoardH5FileStatus status)
 ```
@@ -380,6 +380,20 @@ virtual void onTEBH5FileStatusChanged(const char *fileId, TEduBoardH5FileStatus 
 | --- | --- | --- |
 | fileId | const char * | 文件 ID  |
 | status | TEduBoardH5FileStatus | 文件状态  |
+
+
+### onTEBH5PPTStatusChanged
+H5PPT文件状态改变回调 
+``` C++
+virtual void onTEBH5PPTStatusChanged(const char *fileId, TEduBoardH5PPTStatus status, const char *message)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| fileId | const char * | 文件 ID  |
+| status | TEduBoardH5PPTStatus | 文件状态  |
+| message | const char * | 状态消息  |
 
 
 ### onTEBDeleteFile

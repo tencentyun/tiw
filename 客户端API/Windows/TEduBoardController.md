@@ -90,7 +90,7 @@ EDUSDK_API bool SetTEduBoardLogFilePath(const char *logFilePath)
 ### EnableTEduBoardOffscreenRender
 启用白板离屏渲染 
 ``` C++
-EDUSDK_API bool EnableTEduBoardOffscreenRender(uint32_t maxFps = 30)
+EDUSDK_API bool EnableTEduBoardOffscreenRender(uint32_t maxFps=30)
 ```
 #### 参数
 
@@ -191,7 +191,7 @@ virtual WINDOW_HANDLE GetBoardRenderView()=0
 virtual void Refresh()=0
 ```
 #### 警告
-如果当前白板包含 PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
+如果当前白板包含PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
 
 
 ### SyncAndReload
@@ -200,7 +200,7 @@ virtual void Refresh()=0
 virtual void SyncAndReload()=0
 ```
 #### 警告
-Reload 等同于重新加载历史数据，会触发白板初始化时除 onTEBInit 之外的所有回调。 
+Reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
 
 #### 介绍
 接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制：如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION 
@@ -263,8 +263,8 @@ virtual void SetBoardRenderViewPos(int32_t x, int32_t y, uint32_t width, uint32_
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| x | int32_t | 要设置的白板渲染 View 的位置 X 分量  |
-| y | int32_t | 要设置的白板渲染 View 的位置 Y 分量  |
+| x | int32_t | 要设置的白板渲染 View 的位置X分量  |
+| y | int32_t | 要设置的白板渲染 View 的位置Y分量  |
 | width | uint32_t | 要设置的白板渲染 View 的宽度  |
 | height | uint32_t | 要设置的白板渲染 View 的高度 |
 
@@ -362,8 +362,8 @@ virtual void SendMouseWheelEvent(const TEduBoardMouseEvent &event, int deltaX, i
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | event | const TEduBoardMouseEvent & | 要发送的鼠标事件  |
-| deltaX | int | 滚轮在 X 方向的移动增量  |
-| deltaY | int | 滚轮在 Y 方向的移动增量  |
+| deltaX | int | 滚轮在X方向的移动增量  |
+| deltaY | int | 滚轮在Y方向的移动增量  |
 
 
 ### SendTouchEvent
@@ -716,7 +716,7 @@ virtual void SetBackgroundImage(const char *url, TEduBoardImageFitMode mode)=0
 | mode | TEduBoardImageFitMode | 要使用的图片填充对齐模式 |
 
 #### 介绍
-当 URL 是一个有效的本地文件地址时，该文件会被自动上传到 COS 
+当URL是一个有效的本地文件地址时，该文件会被自动上传到COS 
 
 
 ### SetBackgroundH5
@@ -1074,8 +1074,8 @@ virtual const char* AddImagesFile(const char **urls, uint32_t urlCount)=0
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| urls | const char ** | 要使用的图片 UR L列表，编码格式为 UTF8，不允许为 nullptr  |
-| urlCount | uint32_t | 图片 URL 个数  |
+| urls | const char ** | 要使用的图片URL列表，编码格式为UTF8，不允许为nullptr  |
+| urlCount | uint32_t | 图片URL个数  |
 
 #### 返回
 文件 ID 
