@@ -1,3 +1,8 @@
+### 2.5.2.49 @ 2020.08.18
+* [点击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.2.49.zip)
+- WebView版本更新
+    -Android 10及以上版本强制使用系统WebView
+
 ### 2.5.2.48 @ 2020.08.07
 * [点击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.2.48.zip)
 
