@@ -1,3 +1,18 @@
+
+### 2.5.3.134 @ 2020.08.31
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.5.3.134.zip)
+
+- 新增回调
+    - 新增视频状态回调 TEDU_BOARD_VIDEO_STATUS_WAITING 和 TEDU_BOARD_VIDEO_STATUS_PLAYING
+- Bug 修复
+    - 修复激光笔各端显示比例不一致问题
+    - 修复白板操作在移动端偶现延迟问题
+    - 修复涂鸦到白板外笔迹微变问题
+- 优化
+    - 桌面端画笔使用时持续展示
+    - 视频多次播放失败后回调 ERROR 状态
+    - 日志上报相关优化
+    
 ### 2.5.2.132 @2020.08.07
 * [单击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.5.2.132.zip)
 

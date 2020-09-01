@@ -1,3 +1,16 @@
+### 2.5.3 @ 2020.08.31
+* 链接地址：https://res.qcloudtiw.com/board/2.5.3/TEduBoard.min.js
+
+- 新增回调
+    - 新增视频状态回调 TEDU_BOARD_VIDEO_STATUS_WAITING 和 TEDU_BOARD_VIDEO_STATUS_PLAYING
+- Bug 修复
+    - 修复激光笔各端显示比例不一致问题
+    - 修复白板操作在移动端偶现延迟问题
+    - 修复涂鸦到白板外笔迹微变问题
+- 优化
+    - 桌面端画笔使用时持续展示
+    - 视频多次播放失败后回调 ERROR 状态
+    
 ### 2.5.2 @ 2020.08.07
 * 链接地址：https://res.qcloudtiw.com/board/2.5.2/TEduBoard.min.js
 
@@ -10,11 +23,11 @@
 - 功能支持
     - 图片元素支持任意角度旋转和八个方向的缩放
 - 接口优化
-    - 如果getFileBoardList，getFileInfo接口fid参数缺省，则默认返回当前文件文件的信息
-    - 调用deleteFile接口删除非当前文件，则不跳转至默认文件#DEFAULT
+    - 如果 getFileBoardList，getFileInfo 接口 fid 参数缺省，则默认返回当前文件文件的信息
+    - 调用 deleteFile 接口删除非当前文件，则不跳转至默认文件#DEFAULT
 - bug fix
-    - 修复文字工具在某些输入法下输入过程中，看不见已输入的文字问题。
-    - 修复移动端文字工具在白板边界位置点击，键盘会闪一下的问题。
+    - 修复文字工具在某些输入法下输入过程中，看不见已输入的文字问题
+    - 修复移动端文字工具在白板边界位置点击，键盘会闪一下的问题
 
 
 ### 2.5.0 @ 2020.07.2

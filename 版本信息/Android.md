@@ -1,5 +1,19 @@
+### 2.5.3.61 @ 2020.08.31
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.3.61.zip)
+
+- 新增回调
+    - 新增视频状态回调 TEDU_BOARD_VIDEO_STATUS_WAITING 和 TEDU_BOARD_VIDEO_STATUS_PLAYING
+- Bug 修复
+    - 修复激光笔各端显示比例不一致问题
+    - 修复白板操作在移动端偶现延迟问题
+    - 修复涂鸦到白板外笔迹微变问题
+- 优化
+    - 桌面端画笔使用时持续展示
+    - 视频多次播放失败后回调 ERROR 状态
+    - 日志上报相关优化
+    
 ### 2.5.2.49 @ 2020.08.18
-* [点击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.2.49.zip)
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.2.49.zip)
 - WebView版本更新
     -Android 10及以上版本强制使用系统WebView
 
@@ -10,7 +24,7 @@
     - 新增H5PPT状态回调 onTEBH5PPTStatusChanged
     
 ### 2.5.1.47 @ 2020.07.23
-* [点击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.1.47.zip)
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.1.47.zip)
 
 - 功能支持
     - 图片元素支持任意角度旋转和八个方向的缩放
