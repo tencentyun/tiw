@@ -1,4 +1,16 @@
 
+### 2.5.4.21 @ 2020.10.15
+* [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.5.4.21.zip)
+* [单击下载 SDK（macOS）](https://sdk.qcloudtiw.com/mac/TEduBoard_Mac_2.5.4.21.zip)
+
+- 新增工具类型
+    - 新增正圆，正方形工具类，同时支持椭圆工具和矩形工具按shift键画正圆和正方形
+- 优化
+    - 优化橡皮擦擦除箭头工具不精确的问题
+- Bug 修复
+    - 修复多端同时移动图片元素不同步的问题
+    - 修复其他已知问题
+    
 ### 2.5.3.20 @ 2020.08.31
 * [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.5.3.20.zip)
 * [单击下载 SDK（macOS）](https://sdk.qcloudtiw.com/mac/TEduBoard_Mac_2.5.3.20.zip)
@@ -12,7 +24,7 @@
 - 优化
     - 桌面端画笔使用时持续展示
     - 视频多次播放失败后回调 ERROR 状态
-    - 日志上报相关优化
+    - 日志上报优
     
 ### 2.5.2.10 @ 2020.08.07
 * [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.5.2.10.zip)
