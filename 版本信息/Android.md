@@ -1,4 +1,16 @@
+### 2.5.5.68 @ 2020.11.09
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.5.68.zip)
 
+- 新增特性：
+    - 新增文字工具预设文本内容 setNextTextInput
+    - 优化白板缩放工具，支持鼠标滚轮缩放，焦点缩放，按shift键缩小交互方式
+    - TEduBoardToolType 新增自定义图形工具
+    - 新增 addElement 接口，支持添加自定义图形的元素
+    - 新增 onTEBAddElement 回调
+    - 新增白板放大后显示滚动条
+- Bug 修复
+    - 修复偶现画笔不消失的bug
+    
 ### 2.5.4.67 @ 2020.10.15
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.4.67.zip)
 
