@@ -1,5 +1,5 @@
-### 2.5.5.68 @ 2020.11.09
-* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.5.68.zip)
+### 2.5.5.70 @ 2020.11.09
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.5.70.zip)
 
 - 新增特性：
     - 新增文字工具预设文本内容 setNextTextInput
