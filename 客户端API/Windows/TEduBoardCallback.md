@@ -59,7 +59,7 @@ virtual void onTEBSyncData(const char *data)
 | data | const char * | 白板同步数据（JSON 格式字符串） |
 
 #### 介绍
-收到该回调时需要将回调数据通过信令通道发送给房间内其他人，接受者收到后调用 AddSyncData 接口将数据添加到白板以实现数据同步，该回调用于多个白板间的数据同步，使用腾讯云 IMSDK 进行实时数据同步时，不会收到该回调。 
+收到该回调时需要将回调数据通过信令通道发送给房间内其他人，接受者收到后调用 AddSyncData 接口将数据添加到白板以实现数据同步，该回调用于多个白板间的数据同步，使用腾讯云 IMSDK 进行实时数据同步时，不会收到该回调。
 
 
 ### onTEBUndoStatusChanged
@@ -204,6 +204,9 @@ virtual void onTEBAddImageElement(const char *url)
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | url | const char * | 调用 AddImageElement 时传入的 URL |
+
+#### 警告
+该回调已废弃，请使用 AddElement 接口及 onTEBAddElement 回调代替
 
 #### 介绍
 只有本地调用 AddImageElement 时会收到该回调 收到该回调表示图片已经上传或下载成功，并且显示出来 
@@ -370,7 +373,7 @@ virtual void onTEBVideoStatusChanged(const char *fileId, TEduBoardVideoStatus st
 
 
 ### onTEBH5FileStatusChanged
-H5文件状态回调 
+H5 文件状态回调 
 ``` C++
 virtual void onTEBH5FileStatusChanged(const char *fileId, TEduBoardH5FileStatus status)
 ```

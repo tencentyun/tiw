@@ -127,10 +127,26 @@
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| url | NSString * | 调用 SetBackgroundImage 时传入的 URL |
+| url | NSString * | 调用 addImageElement 时传入的 URL  |
+
+#### 警告
+此接口将被废弃，请使用 addElement 添加元素，并监听 onTEBAddElement 回调 只有本地调用 addImageElement 时会收到该回调 收到该回调表示背景图片已经上传或下载成功，并且显示出来 
+
+
+### onTEBAddElement:url:
+添加元素回调 
+``` Objective-C
+- (void)onTEBAddElement:(NSString *)elementId url:(NSString *)url 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | NSString * | 调用 addElement 时返回的元素 ID  |
+| url | NSString * | 调用 addElement 时传入的 url |
 
 #### 介绍
-只有本地调用 addImageElement 时会收到该回调 收到该回调表示背景图片已经上传或下载成功，并且显示出来 
+只有本地调用 addElement 时会收到该回调 收到该回调表示元素添加成功，并且显示出来 
 
 
 ### onTEBBackgroundH5StatusChanged:url:status:

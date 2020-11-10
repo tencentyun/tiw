@@ -133,6 +133,19 @@ void onTEBAddImageElement(final String url)
 只有本地调用 addImageElement 时会收到该回调 收到该回调表示背景图片已经上传或下载成功，并且显示出来 
 
 
+### onTEBAddElement
+添加元素回调 
+``` Java
+void onTEBAddElement(final String id, final String url)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| id | final String |  |
+| url | final String |  |
+
+
 ### onTEBBackgroundH5StatusChanged
 设置白板背景 H5 状态改变回调 
 ``` Java

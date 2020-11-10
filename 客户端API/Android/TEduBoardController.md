@@ -289,6 +289,19 @@ int getToolType()
 正在使用的白板工具 
 
 
+### setZoomCursorIcon
+自定义缩放工具图标 
+``` Java
+void setZoomCursorIcon(TEduBoardController.TEduBoardCursorIcon zoomInIconUrl, TEduBoardController.TEduBoardCursorIcon zoomOutIconUrl)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| zoomInIconUrl | TEduBoardController.TEduBoardCursorIcon | 放大工具图标  |
+| zoomOutIconUrl | TEduBoardController.TEduBoardCursorIcon | 缩小工具图标  |
+
+
 ### setCursorIcon
 自定义白板工具鼠标样式 
 ``` Java
@@ -466,6 +479,19 @@ TEduBoardLineStyle getLineStyle()
 ```
 #### 返回
 直线样式 
+
+
+### setNextTextInput
+预设文本工具内容 
+``` Java
+void setNextTextInput(String textContent, boolean keepFocus)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| textContent | String | 预设文本内容  |
+| keepFocus | boolean | 是否继续保持焦点  |
 
 
 ### setOvalDrawMode
@@ -791,7 +817,7 @@ void refresh()
 void syncAndReload()
 ```
 #### 警告
-Reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
+Reload 等同于重新加载历史数据，会触发白板初始化时除 onTEBInit 之外的所有回调。 
 
 #### 介绍
 接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制： （1）仅支持2.4.9及以上版本 （2）如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION 
@@ -880,6 +906,25 @@ TEduBoardTranscodeFileResult 的字段信息主要来自：
 2. （推荐）使用服务端 REST API 转码，只需传入转码回调结果的四个字段（title，resolution，url，pages），其服务端->客户端字段的对应关系为 Title->title、Resolution->resolution、ResultUrl->url、Pages->pages 字段 [转码文档](https://cloud.tencent.com/document/product/1137/40260)
 
 
+### addElement
+添加白板元素 
+``` Java
+String addElement(int type, String url)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| type | int | 元素类型，当设置 TEDU_BOARD_ELEMENT_IMAGE时，等价于 addImageElement 方法  |
+| url | String | 网页或者图片的 url，只支持 https 协议的网址或者图片 url  |
+
+#### 返回
+元素ID 
+
+#### 警告
+（1）当 type = TEDU_BOARD_ELEMENT_IMAGE，支持 png、jpg、gif、svg 格式的本地和网络图片，当 url 是一个有效的本地文件地址时，该文件会被自动上传到 COS，上传进度回调 onTEBFileUploadStatus （2）当 type = TEDU_BOARD_ELEMENT_CUSTOM_GRAPH，仅支持网络 url，请与自定义图形工具 TEDU_BOARD_TOOL_TYPE_BOARD_CUSTOM_GRAPH 配合使用 
+
+
 ### addImageElement
 添加图片资源 
 ``` Java
@@ -889,7 +934,10 @@ void addImageElement(String url)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| url | String | 【必填】图片地址 支持 png/jpg/gif/svg 格式的本地和网络图片，当 URL 是一个有效的本地文件地址时，该文件会被自动上传到 COS。上传进度回调 onTEBFileUploadProgress，上传结果回调 onTEBFileUploadStatus  |
+| url | String | 【必填】图片地址  |
+
+#### 警告
+该接口已废弃，请使用addElement接口代替 支持 png/jpg/gif/svg 格式的本地和网络图片，当 URL 是一个有效的本地文件地址时，该文件会被自动上传到 COS。上传进度回调 onTEBFileUploadProgress，上传结果回调 onTEBFileUploadStatus 
 
 
 ### deleteFile
@@ -967,7 +1015,7 @@ TEduBoardFileInfo getFileInfo(String fid)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fid | String |  |
+| fid | String | 获取白板中指定文件的文件信息 |
 
 #### 返回
 文件信息 
@@ -1166,8 +1214,5 @@ void snapshot(TEduBoardSnapshotInfo info)
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | info | TEduBoardSnapshotInfo | 快照信息  |
-
-
-
 
 
