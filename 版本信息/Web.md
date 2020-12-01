@@ -2,15 +2,15 @@
 * 链接地址：https://res.qcloudtiw.com/board/2.5.5/TEduBoard.min.js
 
 - 新增特性：
-    1. 新增文字工具预设文本内容 setNextTextInput
-    2. 优化白板缩放移动工具，支持鼠标滚轮缩放，焦点缩放，按shift键缩小等
-    3. 新增白板缩放工具图标] setZoomCursorIcon
-    4. TEduBoardToolType 新增自定义图形工具
-    5. TEduBoardElementType 新增自定义图形的元素类型
-    6. 新增白板放大后显示滚动条
+    - 新增文字工具预设文本内容 setNextTextInput
+    - 优化白板缩放移动工具，支持鼠标滚轮缩放，焦点缩放，按shift键缩小等
+    - 新增白板缩放工具图标] setZoomCursorIcon
+    - TEduBoardToolType 新增自定义图形工具
+    - TEduBoardElementType 新增自定义图形的元素类型
+    - 新增白板放大后显示滚动条
 - Bug 修复
-    1. Mac端鼠标缓慢移除白板左边缘和上边缘，鼠标指针不隐藏的 bug
-    2. 修复偶现画笔不消失的 bug
+    - Mac端鼠标缓慢移除白板左边缘和上边缘，鼠标指针不隐藏的 bug
+    - 修复偶现画笔不消失的 bug
 
 - 缩放移动工具使用说明：
     
@@ -20,7 +20,7 @@
 * 链接地址：https://res.qcloudtiw.com/board/2.5.4/TEduBoard.min.js
 
 - 新增工具类型
-    - 1. 新增正圆，正方形工具类，同时支持椭圆工具和矩形工具按shift键画正圆和正方形
+    - 新增正圆，正方形工具类，同时支持椭圆工具和矩形工具按shift键画正圆和正方形
 - 优化
     - 优化橡皮擦擦除箭头工具不精确的问题
 - Bug 修复
