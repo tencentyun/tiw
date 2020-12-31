@@ -1,6 +1,5 @@
 ### 2.5.6.85 @ 2020.12.14
-* [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.5.6.85.zip)
-* [单击下载 SDK（macOS）](https://sdk.qcloudtiw.com/mac/TEduBoard_Mac_2.5.6.85.zip)
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.6.85.zip)
 
 - 新增接口：
     1. 增加是否启用原生系统光标接口 setSystemCursorEnable
