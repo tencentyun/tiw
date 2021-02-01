@@ -1,3 +1,9 @@
+### 2.5.6.183 @ 2021-01-27
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.6.183.zip)
+
+- Bug 修复
+    - 修复偶现丢失收到的笔画问题
+
 ### 2.5.6.177 @ 2020-12-16
 * [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.6.177.zip)
 
