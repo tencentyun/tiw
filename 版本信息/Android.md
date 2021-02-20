@@ -1,3 +1,37 @@
+### 2.5.7.86 @ 2021.02.04
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.7.86.zip)
+
+- 新增接口：
+   1. 增加移动白板接口(setScaleAnchor)
+   2. 增加是否在画线过程中显示远端画笔接口(setRemoteCursorVisible)
+   3. 音频元素-设置音量大小(setAudioVolume)
+   4. 音频元素-获取音量大小(getAudioVolume)
+   5. 增加设置缩放工具的缩放比例(setScaleToolRatio)
+   6. 增加添加资源主备域名映射(addBackupDomain)
+   7. 增加删除资源主备域名映射(removeBackupDomain)  
+
+- 新增事件:
+   1. 删除元素事件  
+
+- 新增初始化参数： 
+   1. 增加初始化参数，关闭移动工具的缩放功能 enableScaleTool  
+
+- 优化：
+  1. 添加H5PPT, 图片元素(imageElement)/图片文件(imagesFile)，背景图片，视频等资源支持指定主备Url，需要配合增加备用域名接口使用。
+  2. 静态PPT翻页交互效果优化
+  3. 整点选框样式
+  4. 激光笔功能性能优化Bug 修复   
+ 
+- bug修复：
+  1. 图片旋转后缩放比例不对的问题
+  2. chrome 88版本纵向滚动条缺失
+  3. 滚动条触发异常滚动问题
+  4. 添加自定义元素时点选框范围错误
+  5. 文本工具相关问题
+  6. 其他若干已知问题
+  
+ 
+
 ### 2.5.6.85 @ 2020.12.14
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.6.85.zip)
 

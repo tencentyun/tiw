@@ -6,17 +6,39 @@
 ### TEduBoard
 白板构造函数 
 ``` Javascript
-TEduBoard(TEduBoardInitParam initParams)
+new TEduBoard(initParams)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| initParams | TEduBoardInitParam | 【必填】白板初始化参数  |
-
-
+| initParams | object | 【必填】白板初始化参数  |
+| `initParams.id` |	string |	【必填】白板渲染的 dom 节点 ID |
+| initParams.classId |	number |	【必填】课堂 ID |
+| initParams.sdkAppId |	number |	【必填】腾讯云应用的唯一标识，可登录 实时音视频控制台 查看 |
+| initParams.userId |	string |	【必填】用户名 |
+| initParams.userSig |	string |	【必填】登录鉴权信息 |
+| initParams.ratio |	string |	【可选】默认白板宽高比（可传格式如“4:3”、“16:9”的字符串），默认值 "16:9" |
+| initParams.drawEnable |	boolean |	【可选】是否允许涂鸦，默认值 true |
+| initParams.textStyle |	number |	【可选】文本样式（0：常规；1：粗体；2：斜体；3：粗斜体），默认值 TEduBoard.TEduBoardTextStyle.TEDU_BOARD_TEXT_STYLE_NORMAL 文本样式 |
+| initParams.textSize |	number |	【可选】文本大小，默认值 320，实际像素值取值(textSize * 白板的高度 / 10000)px |
+| initParams.textColor |	string |	【可选】文本颜色，默认值 #000000 |
+| initParams.brushColor |	string |	【可选】画笔颜色，默认值 #ff0000 |
+| initParams.brushThin |	number |	【可选】画笔粗细，默认值 100，实际像素值取值(brushThin * 白板的高度 / 10000)px |
+| initParams.toolType |	number |	【可选】白板工具，默认值 TEduBoard.TEduBoardToolType.TEDU_BOARD_TOOL_TYPE_PEN 工具类型 |
+| initParams.globalBackgroundColor |	string |	【可选】全局背景色，默认值 #ffffff |
+| initParams.boardContentFitMode |	number |	【可选】内容自适应模式，默认值 TEduBoard.TEduBoardContentFitMode.TEDU_BOARD_CONTENT_FIT_MODE_NONE 白板内容自适应模式 |
+| initParams.dataSyncEnable |	boolean |	【可选】是否启用数据同步，禁用后将导致本地白板操作不会被同步给远端，默认值 true |
+| initParams.scale |	number |	【可选】白板默认缩放系数，实际缩放倍数为 scale/100，默认值 100 |
+| initParams.preloadDepth |	number |	【可选】图片预加载深度，默认值 5，表示预加载当前页前后5页的图片 |
+| initParams.progressEnable |	boolean |	【可选】是否启用SDK内置Loading图标，默认值 false |
+| initParams.progressBarUrl |	string |	【可选】自定义加载图标，在 progressEnable = true 时生效，支持 jpg、gif、png、svg |
+| initParams.systemCursorEnable |	string |	【可选】是否启用原生系统光标，默认false，该参数说明具体请看setSystemCursorEnable 接口 |
 ### destroy
-销毁白板 
+
+> 销毁白板
+- 退出课堂请务必调用
+
 ``` Javascript
 void destroy()
 ```

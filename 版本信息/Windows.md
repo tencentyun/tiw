@@ -1,3 +1,31 @@
+### 2.5.7.185 @ 2021-02-02
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.7.185.zip)
+
+- 新增接口
+    1. 增加移动白板接口(SetScaleAnchor)
+    2. 增加是否在画线过程中显示远端画笔接口(SetRemoteCursorVisible)
+    3. 音频元素-设置音量大小(SetAudioVolume)
+    4. 音频元素-获取音量大小(GetAudioVolume)
+    5. 增加设置缩放工具的缩放比例(SetScaleToolRatio)
+    6. 增加添加资源主备域名映射(AddBackupDomain)
+    7. 增加删除资源主备域名映射(RemoveBackupDomain)
+- 新增事件
+    1. 删除元素事件(onTEBRemoveElement)
+- 新增初始化参数：
+    1. 增加初始化参数，关闭移动工具的缩放功能(enableScaleTool)
+- 优化
+    1. 添加H5PPT, 图片元素(imageElement)/图片文件(imagesFile)，背景图片，视频等资源支持指定主备Url，需要配合增加备用域名接口使用
+    2. 静态PPT翻页交互效果优化
+    3. 调整点选框样式
+    4. 激光笔功能性能优化
+- Bug 修复
+    1. 图片旋转后缩放比例不对的问题
+    2. chrome 88版本纵向滚动条缺失
+    3. 滚动条触发异常滚动问题
+    4. 添加自定义元素时点选框范围错误
+    5. 文本工具相关问题
+    6. 其他若干已知问题
+
 ### 2.5.6.183 @ 2021-01-27
 * [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.6.183.zip)
 
