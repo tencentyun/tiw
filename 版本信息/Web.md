@@ -1,3 +1,97 @@
+### 2.6.3 @ 2021.06.28
+* 链接地址：https://res.qcloudtiw.com/board/2.6.3/TEduBoard.min.js
+
+- 新增接口：
+    1. 设置画笔自动拟合模式setPenAutoFittingMode
+    2. 生成板书图片addSnapshotMark
+- 调整接口：
+    1. 添加白板addBoard
+    > 支持新增白板直接设置背景H5
+- 新增初始化参数：
+    1. 白板离线告警时间间隔offlineWarningTimeout
+- 新增事件：
+    1. 白板离线告警TEB_OFFLINE_WARNING
+- 调整事件：
+    1. 增加元素回调TEB_ADDELEMENT
+    > 增加元素回调返回值新增元素类型type
+- 优化：
+    1. 魔法笔功能
+    2. 支持直接创建H5背景白板
+    3. 支持白板离线检测
+    4. 支持生成板书
+- Bug 修复
+    1. 若干已知问题
+
+### 2.6.2 @ 2021.06.09
+* 链接地址：https://res.qcloudtiw.com/board/2.6.2/TEduBoard.min.js
+
+- 调整接口：
+    1. 添加白板元素addElement
+- 调整初始化参数：
+    1. 初始化权限参数 mathGraphEnable，预加载数学函数图像库
+    2. 初始化配置参数 scaleRange，白板缩放范围
+- 新增事件：
+    1. 框选工具选中元素回调TEB_SELECTED_ELEMENTS，原有的回调事件(TEB_RECTSELECTED弃用
+    2. 数学函数图像工具事件回调TEB_MATH_GRAPH_EVENT
+    2. 远端白板缩放移动状态回调TEB_ZOOM_DRAG_STATUS
+- 废除接口
+    1. 废除添加图片元素addImageElement，请使用添加白板元素addElement
+- 优化：
+    1. 支持数学函数图像显示
+    2. 支持H5元素移动、缩放、旋转
+    3. 添加元素支持自定义位置，目前支持图片元素，H5元素，数学函数图像
+    4. 移动端支持在任意工具下双指缩放白板
+- Bug 修复
+    1. 若干已知问题
+
+### 2.6.1 @ 2021.06.01
+* 链接地址：https://res.qcloudtiw.com/board/2.6.1/TEduBoard.min.js
+
+- 调整接口：
+    1. 设置工具的提示语setToolTypeTitle
+    2. 设置允许操作哪些用户绘制的图形setAccessibleUsers
+    2. 设置用户信息setUserInfo
+- 调整初始化参数：
+    1. 优化初始化参数结构
+- 新增事件：
+    1. 文本组件状态回调TEB_TEXT_ELEMENT_STATUS_CHANGED
+    2. 图片元素加载状态TEB_IMAGE_ELEMENT_STATUS_CHANGED
+    3. 白板文字工具异常警告TEB_TEXT_ELEMENT_WARNING
+- 优化：
+    1. 涂鸦支持缩放旋转
+    2. 文本支持等比例缩放
+    3. 优化用户权限控制
+    4. 支持显示远端操作元素
+    5. 支持显示白板元素操作者或创造者信息
+    6. 支持自动隐藏静止的远端画笔
+    7. 优化低版本背景图显示
+- Bug 修复
+    1. 若干已知问题
+
+### 2.6.0 @ 2021.05.07
+* 链接地址：https://res.qcloudtiw.com/board/2.6.0/TEduBoard.min.js
+
+- 重要特性：
+    1. 支持最新的转码方案，具体请看[新文档转码](../开发指南/新文档转码/快速接入.md)
+
+- 新增接口：
+    1. 增加设置代理服务器(setProxyServer)
+    2. 增加设置单次擦除图层数量(setEraseLayerLimit)
+    3. 增加限制橡皮擦可擦除的数据类型(setEraseLayerType)
+- 新增初始化参数：
+    1. 增加初始化参数，代理服务器配置 proxyServer
+- 优化：
+    1. 涂鸦绘制性能优化
+    2. 涂鸦旋转移动性能优化
+    3. 激光笔移动性能优化
+    4. 激光笔多端同步效果优化
+    5. PPT、图片元素加载
+    6. 涂鸦超出白板区域时框选范围错误
+    7. 优化白板渲染时的重排、重绘操作
+- Bug 修复
+    1. 截图时文本元素被iframe元素遮挡
+    2. 直线碰撞检测计算错误
+    3. 其他若干已知问题
 ### 2.5.7 @ 2021.02.02
 * 链接地址：https://res.qcloudtiw.com/board/2.5.7/TEduBoard.min.js
 
@@ -27,40 +121,39 @@
     4. 添加自定义元素时点选框范围错误
     5. 文本工具相关问题
     6. 其他若干已知问题
-
 ### 2.5.6 @ 2020.12.14
 * 链接地址：https://res.qcloudtiw.com/board/2.5.6/TEduBoard.min.js
 
 - 新增接口：
-    1. 增加是否启用原生系统光标接口 setSystemCursorEnable
+    - 增加是否启用原生系统光标接口 setSystemCursorEnable
         - 开启该功能后画笔图标和激光笔图标将使用系统的光标样式来实现，画笔图标和激光笔图标在本地会有一丢丢的流畅度提升。
         - 开启该功能后会出现画笔图标和涂鸦有一点延迟现象，属于正常现象。
         - 开启该功能 Mac 端在一些情况下会导致光标变成默认的鼠标指针，如消息弹窗等行为，属于正常现象。
-    2. 增加设置画笔和激光笔工具的提示语接口 setToolTypeTitle
-    3. 支持音频元素
-        -新增音频 addElement
-        -播放音频 playAudio
-        -暂停音频 pauseAudio
-        -跳转进度 seekAudio
-        -是否启用音频控制面板 enableAudioControl
+    - 增加设置画笔和激光笔工具的提示语接口 setToolTypeTitle
+    - 支持音频元素
+        - 新增音频 addElement
+        - 播放音频 playAudio
+        - 暂停音频 pauseAudio
+        - 跳转进度 seekAudio
+        - 是否启用音频控制面板 enableAudioControl
 - 新增特性：
-    1. 点选和框选工具合并
-    2. 激光笔和画笔支持多人
+    - 点选和框选工具合并
+    - 激光笔和画笔支持多人
 - 体验优化：
-    1. 选择工具,橡皮擦选中精度优化。
+    - 选择工具，橡皮擦选中精度优化。
 
 ### 2.5.5 @ 2020.11.05
 * 链接地址：https://res.qcloudtiw.com/board/2.5.5/TEduBoard.min.js
 
 - 新增特性：
     - 新增文字工具预设文本内容 setNextTextInput
-    - 优化白板缩放移动工具，支持鼠标滚轮缩放，焦点缩放，按shift键缩小等
+    - 优化白板缩放移动工具，支持鼠标滚轮缩放，焦点缩放，按 shift 键缩小等
     - 新增白板缩放工具图标] setZoomCursorIcon
     - TEduBoardToolType 新增自定义图形工具
     - TEduBoardElementType 新增自定义图形的元素类型
     - 新增白板放大后显示滚动条
 - Bug 修复
-    - Mac端鼠标缓慢移除白板左边缘和上边缘，鼠标指针不隐藏的 bug
+    - Mac 端鼠标缓慢移除白板左边缘和上边缘，鼠标指针不隐藏的 bug
     - 修复偶现画笔不消失的 bug
 
 - 缩放移动工具使用说明：

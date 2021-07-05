@@ -16,7 +16,7 @@
 
 ### 自动加载（aar）
 
-TEduBoard SDK 和 TIMSDK 已经发布到 jcenter 库，您可以通过配置 gradle 自动下载更新。
+TEduBoard SDK 和 TIMSDK 已经发布到 Maven Central 库，您可以通过配置 gradle 自动下载更新。
 
 ![](https://main.qcloudimg.com/raw/13352150cb8bb0a729c28500a05c338f.png)
 
@@ -24,18 +24,18 @@ TEduBoard SDK 和 TIMSDK 已经发布到 jcenter 库，您可以通过配置 gra
 
 ```java
 dependencies {
-    implementation 'com.tencent.teduboard:TEduBoardSdk:latest.release'
+    implementation 'com.tencent.edu:TEduBoardSdk:latest.release'
     implementation 'com.tencent.imsdk:imsdk:latest.release'
 }
 ```
 
 #### 2. 同步 SDK
 
-单击 Sync Now 按钮，如果您的网络连接 jcenter 没有问题，很快 SDK 就会自动下载集成到工程里。
+单击 Sync Now，如果您的网络连接 Maven Central 没有问题，很快 SDK 就会自动下载集成到工程里。
 
 ### 手动下载（aar）
 
-如果您的网络连接 jcenter 有问题，也可以手动下载 SDK 集成到工程里.
+如果您的网络连接 Maven Central 有问题，也可以手动下载 SDK 集成到工程里。
 
 #### 1. 下载 SDK
 
@@ -61,9 +61,8 @@ dependencies {
 ```java
 dependencies {
     implementation (name: "TEduBoardSdk-release", ext: "aar")
-    implementation (name: "imsdk-4.6.1", ext: "aar")
-    implementation 'com.tencent.tiw.logger:TIWLogger:1.0.1.26'
-    implementation 'com.tencent.tbs.tbssdk:sdk:43939'
+    implementation (name: "imsdk-4.6.1", ext: "aar")  
+    implementation 'com.tencent.edu:TIWLogger:1.0.1.29'
 }
 ```
 
@@ -71,7 +70,7 @@ dependencies {
 
 #### 5. 同步 SDK
 
-单击 Sync Now 按钮，完成 TEduBoard SDK 集成。
+单击 Sync Now，完成 TEduBoard SDK 集成。
 
 
 ### Google Play 境外版本集成方式
@@ -80,7 +79,7 @@ dependencies {
 集成方法如下：
 
 #### 1.下载并导入精简版 TBS SDK
-下载([下载地址](https://sdk-1259648581.cos.ap-nanjing.myqcloud.com/android/tbs/tbs_sdk_noimpl_43799.jar)) TBS SDK 的 jar 文件并拷贝到工程的 app/libs 目录下。
+[下载地址](https://sdk-1259648581.cos.ap-nanjing.myqcloud.com/android/tbs/tbs_sdk_noimpl_43799.jar) TBS SDK 的 jar 文件并拷贝到工程的 app/libs 目录下。
 
 ![](https://main.qcloudimg.com/raw/a3a00d36964e50f3ec4605900d9c8ab1.png)
 
@@ -104,14 +103,15 @@ dependencies {
 ```grovy
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.tencent.teduboard:TEduBoardSdkNoTbs:2.4.8.31'
-    implementation 'com.tencent.tiw.logger:TIWLogger:1.0.1.26'
+    implementation ('com.tencent.teduboard:TEduBoardSdk:latest.release'){
+        exclude group: 'com.tencent.tbs.tbssdk', module: 'sdk'
+    }
     ...
 }
 ```
 ![](https://main.qcloudimg.com/raw/233c90a563a5288e1654eb6e459f313a.png)
 
-注意，这种情况下不能依赖带 TBS 模块的白板 SDK，否则会导致依赖冲突，无法编译通过。
+>!这种情况下不能依赖带 TBS 模块的白板 SDK，否则会导致依赖冲突，无法编译通过。
 
 ## 配置 App 权限
 
@@ -150,8 +150,7 @@ mBoard.init(authParam, classId, initParam);
 
 其中 `sdkAppId`、`userId`、`userSig`、`classId`为需要您自己填写的参数。
 
-注意事项
-请在主进程中执行初始化操作，如果您的 App 使用了多进程，请注意注意避免重复初始化。
+>!请在主进程中执行初始化操作，如果您的 App 使用了多进程，请注意注意避免重复初始化。
 
 #### 2. 白板窗口获取及显示
 在 `onTEBInit`  回调方法内，使用如下代码获取并显示白板视图：
@@ -179,7 +178,7 @@ SDK 所有回调都在主线程内执行，因此可以在回调里直接执行 
 
 白板在使用过程中，需要在不同的用户之间进行数据同步（涂鸦数据等），SDK 默认使用 IMSDK 作为信令通道，您需要自行实现 IMSDK 的初始化、登录、加入群组操作，确保白板初始化时，IMSDK 已处于所指定的群组内。
 
-步骤一、初始化 IMSDK
+步骤1：初始化 IMSDK
 
 ```java
 TIMSdkConfig timSdkConfig = new TIMSdkConfig(appId)
@@ -191,7 +190,7 @@ TIMManager.getInstance().init(context, timSdkConfig);
 
 如果您有其他业务使用了 IMSDK 并期望 IMSDK 的生命周期与 App 的生命周期保持一致，请在 Application 的 onCreate 方法中初始化 IMSDK，否则请在登录前初始化 IMSDK，在登出后反初始化 IMSDK 。
 
-步骤二、登录 IMSDK
+步骤2：登录 IMSDK
 
 ```java
 TIMGroupManager.getInstance().login(userId, userSig, new TIMCallBack() {
@@ -205,9 +204,8 @@ TIMGroupManager.getInstance().login(userId, userSig, new TIMCallBack() {
         // 创建 IM 群组失败        
 });
 ```
-```
 
-步骤三、加入群组
+步骤3：加入群组
 
 登录 IMSDK 成功后加入白板所在的群组。
 
@@ -240,10 +238,8 @@ TIMGroupManager.getInstance().createGroup(param, new TIMValueCallBack<String>() 
 });
 ```
 
-注意事项
 
-1. 推荐业务后台使用 [IM REST API](https://cloud.tencent.com/document/product/269/1615) 提前创建群组。
-2. 不同的群组类型，群组功能以及成员数量有所区别，具体请查看 [IM 群组系统](https://cloud.tencent.com/document/product/269/1502)。
+>!1. 推荐业务后台使用 [IM REST API](https://cloud.tencent.com/document/product/269/1615) 提前创建群组。<br>2. 不同的群组类型，群组功能以及成员数量有所区别，具体请查看 [IM 群组系统](https://cloud.tencent.com/document/product/269/1502)。
 
 
 #### 4. 销毁白板
@@ -256,7 +252,7 @@ mBoard.uninit();
 
 如果您使用 IMSDK 作为信令通道，请根据业务的需要决定是否退出群组、退出登录并反初始化。
 
-步骤一、退出群组
+步骤1：退出群组
 
 ```java
 TIMGroupManager.getInstance().quitGroup(groupId, new TIMCallBack() {//NOTE:在被挤下线时，不会回调
@@ -272,7 +268,7 @@ TIMGroupManager.getInstance().quitGroup(groupId, new TIMCallBack() {//NOTE:在�
 });
 ```
 
-步骤二、登出 IMSDK
+步骤2：登出 IMSDK
 
 ```java
 TIMManager.getInstance().logout(new TIMCallBack() {
@@ -287,7 +283,7 @@ TIMManager.getInstance().logout(new TIMCallBack() {
 });
 ```
 
-步骤三、反初始化 IMSDK
+步骤3：反初始化 IMSDK
 
 ```java
 TIMManager.getInstance().unInit();

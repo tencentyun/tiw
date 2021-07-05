@@ -136,14 +136,69 @@ void onTEBAddImageElement(final String url)
 ### onTEBAddElement
 添加元素回调 
 ``` Java
-void onTEBAddElement(final String id, final String url)
+void onTEBAddElement(final String id, int type, final String url)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| id | final String |  |
+| id | final String | 元素id  |
+| type | int | 元素类型 TEduBoardElementType  |
 | url | final String |  |
+
+
+### onTEBDeleteElement
+删除元素回调 
+``` Java
+void onTEBDeleteElement(final List< String > id)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| id | final List< String > | 元素id  |
+
+
+### onTEBSelectElement
+框选工具选中元素回调 
+``` Java
+void onTEBSelectElement(List< ElementItem > elementItemList)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementItemList | List< ElementItem > |  |
+
+
+### onTEBMathGraphEvent
+数学函数图像工具事件 
+``` Java
+void onTEBMathGraphEvent(int code, String boardId, String graphId, String message)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| code | int | 数学函数图像工具状态码  |
+| boardId | String | 函数画板ID  |
+| graphId | String | 函数图像ID  |
+| message | String | 异常信息  |
+
+
+### onTEBZoomDragStatus
+远端白板缩放移动状态回调 
+``` Java
+void onTEBZoomDragStatus(String fid, int scale, int xOffset, int yOffset)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| fid | String | 文件fid  |
+| scale | int | 文件缩放比  |
+| xOffset | int | 当前可视区域距左上角的横向偏移量  |
+| yOffset | int | 当前可视区域距左上角的纵向偏移量  |
 
 
 ### onTEBBackgroundH5StatusChanged
@@ -158,6 +213,34 @@ void onTEBBackgroundH5StatusChanged(final String boardId, final String url, fina
 | boardId | final String | 白板 ID  |
 | url | final String | 白板图片 URL  |
 | status | final int | 新的白板图片状态  |
+
+
+### onTEBTextElementWarning
+白板文字工具异常警告 
+``` Java
+void onTEBTextElementWarning(String code, String message)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| code | String | 白板文字工具异常状态码(TEduBoardTextComponentStatus)  |
+| message | String | 异常信息  |
+
+
+### onTEBImageElementStatusChanged
+白板图片元素加载状态 
+``` Java
+void onTEBImageElementStatusChanged(int status, String currentBoardId, String imgUrl, String currentImgUrl)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| status | int | 图片加载状态（TEduBoardImageStatus）  |
+| currentBoardId | String | 当前白板id  |
+| imgUrl | String | 加载的url  |
+| currentImgUrl | String | 已废弃，请忽略  |
 
 
 
@@ -230,8 +313,17 @@ void onTEBRectSelected()
 void onTEBRefresh()
 ```
 
+### onTEBOfflineWarning
+白板离线告警 
+``` Java
+void onTEBOfflineWarning(int count)
+```
+#### 参数
 
-## 文件操作回调
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| count | int | 告警次数  |
+
 
 ### onTEBAddTranscodeFile
 增加转码文件回调 
@@ -361,6 +453,21 @@ void onTEBVideoStatusChanged(String fileId, int status, float progress, float du
 | duration | float | 总时长（秒）（仅支持 mp4 格式）  |
 
 
+### onTEBAudioStatusChanged
+音频文件状态回调 
+``` Java
+void onTEBAudioStatusChanged(String elementId, int status, float progress, float duration)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | String | 元素 ID  |
+| status | int | 文件状态  |
+| progress | float | 当前进度（秒）  |
+| duration | float | 总时长（秒）  |
+
+
 ### onTEBSnapshot
 白板快照 
 ``` Java
@@ -387,6 +494,22 @@ void onTEBH5PPTStatusChanged(final int statusCode, final String fid, final Strin
 | statusCode | final int | 状态码  |
 | fid | final String | 文件fid  |
 | describeMsg | final String | 事件描述信息  |
+
+
+### onTEBTextElementStatusChange
+文本组件状态回调 
+``` Java
+void onTEBTextElementStatusChange(String status, String id, String value, int left, int top)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| status | String | 文本组件状态（focus：获得焦点，blur：失去焦点）  |
+| id | String | 文本组件id  |
+| value | String | 文本内容  |
+| left | int | 文本组件水平偏移  |
+| top | int | 文本组件垂直偏移  |
 
 
 

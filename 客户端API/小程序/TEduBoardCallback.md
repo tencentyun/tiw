@@ -59,7 +59,7 @@ function TEB_SYNCDATA(Object data)
 | data | Object | 白板同步数据 |
 
 #### 介绍
-收到该回调时需要将回调数据通过信令通道发送给房间内其他人，接受者收到后调用addSyncData接口将数据添加到白板以实现数据同步 该回调用于多个白板间的数据同步，使用腾讯云IMSDK进行实时数据同步时，不会收到该回调 
+收到该回调时需要将回调数据通过信令通道发送给房间内其他人，接受者收到后调用 AddSyncData 接口将数据添加到白板以实现数据同步，该回调用于多个白板间的数据同步，使用腾讯云 IMSDK 进行实时数据同步时，不会收到该回调。
 
 
 ### TEB_OPERATE_CANUNDO_STATUS_CHANGED

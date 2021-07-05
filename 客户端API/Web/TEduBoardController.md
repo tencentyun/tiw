@@ -8,6 +8,19 @@
 ``` Javascript
 new TEduBoard(initParams)
 ```
+
+> 注意：强烈建议在初始化白板对象之前先判断白板对象是否存在，如果存在先销毁白板对象，然后再重新创建，避免页面中存在多个白板对象相互干扰，导致白板出现异常的行为。
+
+```
+// 1. 先判断白板对象是否存在
+if (this.teduBoard) {
+   // 2. 如果白板对象已经存在，则先销毁
+   this.teduBoard.destroy();
+}
+// 3. 创建白板对象
+this.teduBoard = new TEduBoard(initParams)
+```
+
 #### 参数
 
 | 参数 | 类型 | 含义 |
@@ -34,6 +47,12 @@ new TEduBoard(initParams)
 | initParams.progressEnable |	boolean |	【可选】是否启用SDK内置Loading图标，默认值 false |
 | initParams.progressBarUrl |	string |	【可选】自定义加载图标，在 progressEnable = true 时生效，支持 jpg、gif、png、svg |
 | initParams.systemCursorEnable |	string |	【可选】是否启用原生系统光标，默认false，该参数说明具体请看setSystemCursorEnable 接口 |
+| initParams.enableScaleTool |	boolean |	【可选】是否启用白板缩放移动工具的缩放功能，当设置为false，切换到缩放移动工具时缩放功能不可用 |
+| initParams.syncFps |	number |	【可选】信令同步频率，该值的允许范围为 [5, 20]，默认5帧 |
+| initParams.proxyServer |	string |	【可选】是否为白板服务设置代理服务器，传入一个JSON格式字符串。白板服务类型可参考{@link TEduBoard.TEduBoardServiceType 服务类型}，JSON格式可参考<a href="#setProxyServer">setProxyServer</a>接口|
+
+> 更多配置参数，请查看[互动白板API文档](https://doc.qcloudtiw.com/web/TEduBoard.html)。
+
 ### destroy
 
 > 销毁白板

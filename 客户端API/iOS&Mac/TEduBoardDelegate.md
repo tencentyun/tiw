@@ -100,7 +100,7 @@
 | --- | --- | --- |
 | boardId | NSString * | 白板 ID  |
 | url | NSString * | 白板图片 URL  |
-| status | TEduBoardImageStatus | 新的白板图片状态  |
+| status | TEduBoardImageStatus | 新的白板图片状态，注意：如果监听到TEDU_BOARD_IMAGE_STATUS_LOAD_ERROR, TEDU_BOARD_IMAGE_STATUS_LOAD_TIMEOUT事件，请调用refresh 接口进行重新渲染白板。  |
 
 
 ### onTEBSetBackgroundImage:
@@ -118,32 +118,18 @@
 只有本地调用 SetBackgroundImage 时会收到该回调 收到该回调表示背景图片已经上传或下载成功，并且显示出来 
 
 
-### onTEBAddImageElement:
-添加图片元素回调 
-``` Objective-C
-- (void)onTEBAddImageElement:(NSString *)url 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| url | NSString * | 调用 addImageElement 时传入的 URL |
-
-#### 介绍
-只有本地调用 addImageElement 时会收到该回调 收到该回调表示背景图片已经上传或下载成功，并且显示出来 
-
-
-### onTEBAddElement:url:
+### onTEBAddElement:url:type:
 添加元素回调 
 ``` Objective-C
-- (void)onTEBAddElement:(NSString *)elementId url:(NSString *)url 
+- (void)onTEBAddElement:(NSString *)elementId url:(NSString *)url type:(TEduBoardElementType)type 
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | elementId | NSString * | 调用 addElement 时返回的元素 ID  |
-| url | NSString * | 调用 addElement 时传入的 url |
+| url | NSString * | 调用 addElement 时传入的 url  |
+| type | TEduBoardElementType | 元素类型TEduBoardElementType |
 
 #### 介绍
 只有本地调用 addElement 时会收到该回调 收到该回调表示元素添加成功，并且显示出来 
@@ -231,15 +217,6 @@
 | --- | --- | --- |
 | currentStep | uint32_t | 当前白板页动画步数，取值范围 [0, totalStep)  |
 | totalStep | uint32_t | 当前白板页动画总步数  |
-
-
-### onTEBRectSelected
-框选工具选中回调 
-``` Objective-C
-- (void)onTEBRectSelected
-```
-#### 介绍
-只有框选中涂鸦或图片元素后触发回调 
 
 
 ### onTEBRefresh
@@ -420,6 +397,103 @@ H5PPT 文件状态改变回调
 | fileId | NSString * | 文件 ID  |
 | status | TEduBoardH5PPTStatus | 文件状态  |
 | message | NSString * | 状态消息  |
+
+
+### onTEBTextElementStatusChanged:status:value:left:top:
+文本组件状态回调 
+``` Objective-C
+- (void)onTEBTextElementStatusChanged:(NSString *)elementId status:(NSString *)status value:(NSString *)value left:(float)left top:(float)top 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | NSString * | 文本组件id  |
+| status | NSString * | 文本组件状态（focus：获得焦点，blur：失去焦点）  |
+| value | NSString * | 文本内容  |
+| left | float | 文本组件水平偏移  |
+| top | float | 文本组件垂直偏移  |
+
+
+### onTEBImageElementStatusChanged:url:elementId:
+白板图片元素加载状态 
+``` Objective-C
+- (void)onTEBImageElementStatusChanged:(NSString *)boardId url:(NSString *)url elementId:(NSString *)elementId 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| boardId | NSString * | 白板 ID  |
+| url | NSString * | 白板图片 URL  |
+| elementId | NSString * | 当前元素id  |
+
+
+### onTEBTextElemenWarning:msg:
+白板图片元素加载状态 
+``` Objective-C
+- (void)onTEBTextElemenWarning:(TEduBoardTextComponentStatus)code msg:(NSString *)msg 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| code | TEduBoardTextComponentStatus | 白板文字工具异常状态码  |
+| msg | NSString * | 异常信息  |
+
+
+### onTEBSelectedElements:
+框选工具选中元素回调 
+``` Objective-C
+- (void)onTEBSelectedElements:(NSArray< TEduBoardElementInfo * > *)selectdElements 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| selectdElements | NSArray< TEduBoardElementInfo * > * | 被选中元素数组  |
+
+
+### onTEBMathGraphEvent:boardId:graphId:message:
+数学函数图像工具事件 
+``` Objective-C
+- (void)onTEBMathGraphEvent:(TEduBoardMathGraphCode)code boardId:(NSString *)boardId graphId:(NSString *)graphId message:(NSString *)message 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| code | TEduBoardMathGraphCode | 元素ID  |
+| boardId | NSString * | 函数画板ID  |
+| graphId | NSString * | 函数图像ID  |
+| message | NSString * | 异常信息  |
+
+
+### onTEBZoomDragStatus:scale:xOffset:yOffset:
+远端白板缩放移动状态回调 
+``` Objective-C
+- (void)onTEBZoomDragStatus:(NSString *)fid scale:(int)scale xOffset:(int)xOffset yOffset:(int)yOffset 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| fid | NSString * | 文件ID  |
+| scale | int | 文件缩放比  |
+| xOffset | int | 当前可视区域距左上角的横向偏移量  |
+| yOffset | int | 当前可视区域距左上角的纵向偏移量  |
+
+
+### onTEBOfflineWarning:
+白板离线告警 
+``` Objective-C
+- (void)onTEBOfflineWarning:(NSInteger)count 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| count | NSInteger | 告警次数  |
 
 
 

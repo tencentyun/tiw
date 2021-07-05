@@ -1,4 +1,7 @@
 ## TEduBoardCallback
+
+> 互动白板SDK PC端 [详细文档](https://doc.qcloudtiw.com/win32/latest/index.html)
+
 白板事件回调接口 
 
 ## 通用事件回调
@@ -12,8 +15,8 @@ virtual void onTEBError(TEduBoardErrorCode code, const char *msg)=0
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| code | TEduBoardErrorCode | 错误码，参见 TEduBoardErrorCode 定义  |
-| msg | const char * | 错误信息，编码格式为 UTF8  |
+| code | TEduBoardErrorCode | 错误码，参见TEduBoardErrorCode定义  |
+| msg | const char * | 错误信息，编码格式为UTF8  |
 
 
 ### onTEBWarning
@@ -25,8 +28,8 @@ virtual void onTEBWarning(TEduBoardWarningCode code, const char *msg)=0
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| code | TEduBoardWarningCode | 错误码，参见 TEduBoardWarningCode 定义  |
-| msg | const char * | 错误信息，编码格式为 UTF8  |
+| code | TEduBoardWarningCode | 错误码，参见TEduBoardWarningCode定义  |
+| msg | const char * | 错误信息，编码格式为UTF8  |
 
 
 
@@ -56,10 +59,10 @@ virtual void onTEBSyncData(const char *data)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| data | const char * | 白板同步数据（JSON 格式字符串） |
+| data | const char * | 白板同步数据（JSON格式字符串） |
 
 #### 介绍
-收到该回调时需要将回调数据通过信令通道发送给房间内其他人，接受者收到后调用 AddSyncData 接口将数据添加到白板以实现数据同步，该回调用于多个白板间的数据同步，使用腾讯云 IMSDK 进行实时数据同步时，不会收到该回调。
+收到该回调时需要将回调数据通过信令通道发送给房间内其他人，接受者收到后调用AddSyncData接口将数据添加到白板以实现数据同步 该回调用于多个白板间的数据同步，使用腾讯云IMSDK进行实时数据同步时，不会收到该回调 
 
 
 ### onTEBUndoStatusChanged
@@ -71,7 +74,7 @@ virtual void onTEBUndoStatusChanged(bool canUndo)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| canUndo | bool | 白板当前是否还能执行 Undo 操作  |
+| canUndo | bool | 白板当前是否还能执行Undo操作  |
 
 
 ### onTEBRedoStatusChanged
@@ -83,83 +86,24 @@ virtual void onTEBRedoStatusChanged(bool canRedo)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| canRedo | bool | 白板当前是否还能执行 Redo 操作  |
+| canRedo | bool | 白板当前是否还能执行Redo操作  |
 
-
-### onTEBRectSelected
-框选工具选中回调 只有框选中涂鸦或图片元素后触发回调 
-``` C++
-virtual void onTEBRectSelected()
-```
-
-### onTEBRefresh
-刷新白板回调 
-``` C++
-virtual void onTEBRefresh()
-```
 
 ### onTEBOffscreenPaint
 白板离屏渲染回调 
 ``` C++
-virtual void onTEBOffscreenPaint(const void *buffer, uint32_t width, uint32_t height, const TEduBoardRect *dirtyRects, uint32_t dirtyRectCount)
+virtual void onTEBOffscreenPaint(const void *buffer, uint32_t width, uint32_t height)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| buffer | const void * | 白板数据  |
+| buffer | const void * | 白板像素数据，大小为width * height * 4，像素以白板左上方为原点从左到右从上到下按BGRA排列  |
 | width | uint32_t | 白板像素数据的宽度  |
-| height | uint32_t | 白板像素数据的高度  |
-| dirtyRects | const TEduBoardRect * | 需要重绘的矩形区域数组（可能有多个）  |
-| dirtyRectCount | uint32_t | 需要重绘的矩形区域数组个数  |
-
-#### 警告
-该回调不会从统一回调线程触发，可能来自不同线程调用
+| height | uint32_t | 白板像素数据的高度 |
 
 #### 介绍
-该回调只有在启用离屏渲染时才会被触发 当width != 0 || height != 0时，buffer指向白板像素数据，大小为 width * height * 4，像素以白板左上方为原点从左到右从上到下按 BGRA 排列 
-
-
-### onTEBAudioCallbackStarted
-白板音频开始回调 
-``` C++
-virtual void onTEBAudioCallbackStarted(uint32_t channels, uint32_t channelSize, uint32_t sampleRate)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| channels | uint32_t | 回调的音频声道数  |
-| channelSize | uint32_t | 回调的每个声道的采样点个数  |
-| sampleRate | uint32_t | 回调的音频采样率  |
-
-#### 警告
-该回调不会从统一回调线程触发，可能来自不同线程调用 
-
-
-### onTEBAudioCallbackPacket
-白板音频包回调 
-``` C++
-virtual void onTEBAudioCallbackPacket(const float **buffer, int64_t pts)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| buffer | const float ** | 音频数据数组，格式为 buffer[channels][channelSize]  |
-| pts | int64_t | 音频包时间戳  |
-
-#### 警告
-该回调不会从统一回调线程触发，可能来自不同线程调用 
-
-
-### onTEBAudioCallbackStopped
-白板音频停止回调 
-``` C++
-virtual void onTEBAudioCallbackStopped()
-```
-#### 警告
-该回调不会从统一回调线程触发，可能来自不同线程调用 
+该回调只有在启用离屏渲染时才会被触发 
 
 
 
@@ -174,8 +118,8 @@ virtual void onTEBImageStatusChanged(const char *boardId, const char *url, TEduB
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| boardId | const char * | 白板 ID  |
-| url | const char * | 白板图片 URL  |
+| boardId | const char * | 白板ID  |
+| url | const char * | 白板图片URL  |
 | status | TEduBoardImageStatus | 新的白板图片状态  |
 
 
@@ -188,48 +132,14 @@ virtual void onTEBSetBackgroundImage(const char *url)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| url | const char * | 调用 SetBackgroundImage 时传入的 URL |
+| url | const char * | 调用SetBackgroundImage时传入的URL |
 
 #### 介绍
-只有本地调用 SetBackgroundImage 时会收到该回调 收到该回调表示背景图片已经上传或下载成功，并且显示出来 
-
-
-### onTEBAddImageElement
-添加白板图片元素回调 
-``` C++
-virtual void onTEBAddImageElement(const char *url)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| url | const char * | 调用 AddImageElement 时传入的 URL |
-
-#### 警告
-该回调已废弃，请使用 AddElement 接口及 onTEBAddElement 回调代替
-
-#### 介绍
-只有本地调用 AddImageElement 时会收到该回调 收到该回调表示图片已经上传或下载成功，并且显示出来 
-
-
-### onTEBAddElement
-添加白板元素回调 
-``` C++
-virtual void onTEBAddElement(const char *elementId, const char *url)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| elementId | const char * | 调用 AddElement 时返回的元素 ID  |
-| url | const char * | 调用 AddElement 时传入的 URL |
-
-#### 介绍
-只有本地调用 AddElement 时会收到该回调 收到该回调表示元素已经显示出来 
+只有本地调用SetBackgroundImage时会收到该回调 收到该回调表示背景图片已经上传或下载成功，并且显示出来 
 
 
 ### onTEBBackgroundH5StatusChanged
-设置白板背景 H5 状态改变回调 
+设置白板背景H5状态改变回调 
 ``` C++
 virtual void onTEBBackgroundH5StatusChanged(const char *boardId, const char *url, TEduBoardBackgroundH5Status status)
 ```
@@ -237,8 +147,8 @@ virtual void onTEBBackgroundH5StatusChanged(const char *boardId, const char *url
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| boardId | const char * | 白板 ID  |
-| url | const char * | 白板图片 URL  |
+| boardId | const char * | 白板ID  |
+| url | const char * | 白板图片URL  |
 | status | TEduBoardBackgroundH5Status | 新的白板图片状态  |
 
 
@@ -254,8 +164,8 @@ virtual void onTEBAddBoard(const TEduBoardStringList *boardList, const char *fil
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| boardList | const TEduBoardStringList * | 增加的白板页 ID 列表（使用后不需要自行调用 Release 方法释放，SDK 内部自动释放）  |
-| fileId | const char * | 增加的白板页所属的文件 ID（目前版本只可能为::DEFAULT）  |
+| boardList | const TEduBoardStringList * | 增加的白板页ID列表（使用后不需要自行调用Release方法释放，SDK内部自动释放）  |
+| fileId | const char * | 增加的白板页所属的文件ID（目前版本只可能为::DEFAULT）  |
 
 
 ### onTEBDeleteBoard
@@ -267,8 +177,8 @@ virtual void onTEBDeleteBoard(const TEduBoardStringList *boardList, const char *
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| boardList | const TEduBoardStringList * | 删除的白板页 ID（使用后不需要自行调用 Release 方法释放，SDK 内部自动释放）  |
-| fileId | const char * | 删除的白板页所属的文件 ID（目前版本只可能为::DEFAULT）  |
+| boardList | const TEduBoardStringList * | 删除的白板页ID（使用后不需要自行调用Release方法释放，SDK内部自动释放）  |
+| fileId | const char * | 删除的白板页所属的文件ID（目前版本只可能为::DEFAULT）  |
 
 
 ### onTEBGotoBoard
@@ -280,8 +190,8 @@ virtual void onTEBGotoBoard(const char *boardId, const char *fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| boardId | const char * | 跳转到的白板页 ID  |
-| fileId | const char * | 跳转到的白板页所属的文件 ID  |
+| boardId | const char * | 跳转到的白板页ID  |
+| fileId | const char * | 跳转到的白板页所属的文件ID  |
 
 
 ### onTEBGotoStep
@@ -295,18 +205,6 @@ virtual void onTEBGotoStep(uint32_t currentStep, uint32_t totalStep)
 | --- | --- | --- |
 | currentStep | uint32_t | 当前白板页动画步数，取值范围 [0, totalStep)  |
 | totalStep | uint32_t | 当前白板页动画总步数  |
-
-
-### onTEBSnapshot
-白板快照 
-``` C++
-virtual void onTEBSnapshot(const char *path)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| path | const char * | 快照本地路径，编码格式为 UTF8  |
 
 
 
@@ -336,67 +234,10 @@ virtual void onTEBAddTranscodeFile(const char *fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | const char * | 增加的文件 ID |
+| fileId | const char * | 增加的文件ID |
 
 #### 介绍
 文件加载完成后才会触发该回调 
-
-
-### onTEBAddImagesFile
-增加批量图片文件回调 
-``` C++
-virtual void onTEBAddImagesFile(const char *fileId)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| fileId | const char * | 增加的文件 ID |
-
-#### 介绍
-文件加载完成后才会触发该回调 
-
-
-### onTEBVideoStatusChanged
-视频文件状态回调 
-``` C++
-virtual void onTEBVideoStatusChanged(const char *fileId, TEduBoardVideoStatus status, double progress, double duration)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| fileId | const char * | 文件 ID  |
-| status | TEduBoardVideoStatus | 文件状态  |
-| progress | double | 当前进度（秒）（仅支持 mp4 格式）  |
-| duration | double | 总时长（秒）（仅支持 mp4 格式）  |
-
-
-### onTEBH5FileStatusChanged
-H5 文件状态回调 
-``` C++
-virtual void onTEBH5FileStatusChanged(const char *fileId, TEduBoardH5FileStatus status)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| fileId | const char * | 文件 ID  |
-| status | TEduBoardH5FileStatus | 文件状态  |
-
-
-### onTEBH5PPTStatusChanged
-H5PPT文件状态改变回调 
-``` C++
-virtual void onTEBH5PPTStatusChanged(const char *fileId, TEduBoardH5PPTStatus status, const char *message)
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| fileId | const char * | 文件 ID  |
-| status | TEduBoardH5PPTStatus | 文件状态  |
-| message | const char * | 状态消息  |
 
 
 ### onTEBDeleteFile
@@ -408,7 +249,7 @@ virtual void onTEBDeleteFile(const char *fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | const char * | 删除的文件 ID  |
+| fileId | const char * | 删除的文件ID  |
 
 
 ### onTEBSwitchFile
@@ -420,35 +261,35 @@ virtual void onTEBSwitchFile(const char *fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | const char * | 切换到的文件 ID  |
+| fileId | const char * | 切换到的文件ID  |
 
 
 ### onTEBFileUploadProgress
 文件上传进度回调 
 ``` C++
-virtual void onTEBFileUploadProgress(const char *path, int currentBytes, int totalBytes, int uploadSpeed, double percent)
+virtual void onTEBFileUploadProgress(const char *fileId, int currentBytes, int totalBytes, int uploadSpeed, double percent)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| path | const char * | 正在上传的文件路径  |
-| currentBytes | int | 当前已上传大小，单位 bytes  |
-| totalBytes | int | 文件总大小，单位 bytes  |
-| uploadSpeed | int | 文件上传速度，单位 bytes  |
+| fileId | const char * | 正在上传的文件ID  |
+| currentBytes | int | 当前已上传大小，单位bytes  |
+| totalBytes | int | 文件总大小，单位bytes  |
+| uploadSpeed | int | 文件上传速度，单位bytes  |
 | percent | double | 文件上传进度，取值范围 [0, 1]  |
 
 
 ### onTEBFileUploadStatus
 文件上传状态回调 
 ``` C++
-virtual void onTEBFileUploadStatus(const char *path, TEduBoardUploadStatus status, int errorCode, const char *errorMsg)
+virtual void onTEBFileUploadStatus(const char *fileId, TEduBoardUploadStatus status, int errorCode, const char *errorMsg)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| path | const char * | 正在上传的文件路径  |
+| fileId | const char * | 正在上传的文件ID  |
 | status | TEduBoardUploadStatus | 文件上传状态  |
 | errorCode | int | 文件上传错误码  |
 | errorMsg | const char * | 文件上传错误信息  |

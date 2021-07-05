@@ -1,3 +1,52 @@
+## TEduBoard.EVENT.TEB_ERROR
+
+> 白板错误事件[TEB_ERROR](https://doc.qcloudtiw.com/web/TEduBoard.html#.event:TEB_ERROR)
+
+- 注意：1. 白板错误事件一定要监听
+- 注意：2. 白板错误事件属于白板致命错误，只能重新初始化白板才能解决，在重新初始化之前请先调用 destroy 方法进行销毁当前实例。
+
+| 属性 | 类型 | 描述 |
+| --- | --- | --- |
+| errorCode  |	number |	错误码 |
+| errorMessage | string | 错误描述 |
+
+```
+teduBoard.on(TEduBoard.EVENT.TEB_ERROR, (errorCode, errorMessage) => {
+   console.log('======================:  ', 'TEB_ERROR', ' errorCode:', errorCode, ' errorMessage:', errorMessage);
+});
+```
+
+## TEduBoard.EVENT.TEB_WARNING
+
+> 白板警告事件[TEB_WARNING](https://doc.qcloudtiw.com/web/TEduBoard.html#.event:TEB_WARNING)
+
+- 注意：1. 白板警告事件一定要监听
+- 注意：2. 警告事件不是致命事件，不影响白板运行，但需要您针对警告码找出原因并修复。
+
+
+| 属性 | 类型 | 描述 |
+| --- | --- | --- |
+| warnCode |	number |	警告码 |
+| warnMessage |	string |	警告描述 |
+
+```
+teduBoard.on(TEduBoard.EVENT.TEB_WARNING, (warnCode, warnMessage) => {
+   console.log('======================:  ', 'TEB_WARNING', ' warnCode:', warnCode, ' warnMessage:', warnMessage);
+});
+```
+
+## TEduBoard.EVENT.TEB_HISTROYDATA_SYNCCOMPLETED
+
+> 白板历史数据同步完成回调[TEB_HISTROYDATA_SYNCCOMPLETED](https://doc.qcloudtiw.com/web/TEduBoard.html#.event:TEB_HISTROYDATA_SYNCCOMPLETED)
+
+- 注意：针对白板行为的操作，一定要在该事件回调完成后再进行操作，否则无效。如翻页，设置背景色等行为
+
+```
+teduBoard.on(TEduBoard.EVENT.TEB_HISTROYDATA_SYNCCOMPLETED, () => {
+   console.log('======================:  ', 'TEB_HISTROYDATA_SYNCCOMPLETED');
+});
+```
+
 ## TEduBoard.EVENT.TEB_ADDBOARD
 
 > 新增白板事件[TEB_ADDBOARD](https://doc.qcloudtiw.com/web/TEduBoard.html#.event:TEB_ADDBOARD)
@@ -150,23 +199,7 @@ teduBoard.on(TEduBoard.EVENT.TEB_DELETEFILE, (fileId) => {
 });
 ```
 
-## TEduBoard.EVENT.TEB_ERROR
 
-> 白板错误事件[TEB_ERROR](https://doc.qcloudtiw.com/web/TEduBoard.html#.event:TEB_ERROR)
-
-- 注意：1. 白板错误事件一定要监听
-- 注意：2. 白板错误事件属于白板致命错误，只能重新初始化白板才能解决，在初始化之前请先调用 destroy 方法进行销毁当前实例。
-
-| 属性 | 类型 | 描述 |
-| --- | --- | --- |
-| errorCode  |	number |	错误码 |
-| errorMessage | string | 错误描述 |
-
-```
-teduBoard.on(TEduBoard.EVENT.TEB_ERROR, (errorCode, errorMessage) => {
-   console.log('======================:  ', 'TEB_ERROR', ' errorCode:', errorCode, ' errorMessage:', errorMessage);
-});
-```
 
 ## TEduBoard.EVENT.TEB_FILEUPLOADPROGRESS
 
@@ -281,18 +314,6 @@ teduBoard.on(TEduBoard.EVENT.TEB_H5FILE_STATUS_CHANGED, (data) => {
 ```
 teduBoard.on(TEduBoard.EVENT.TEB_H5PPT_STATUS_CHANGED, (status, data) => {
    console.log('======================:  ', 'TEB_H5PPT_STATUS_CHANGED', status, data);
-});
-```
-
-## TEduBoard.EVENT.TEB_HISTROYDATA_SYNCCOMPLETED
-
-> 白板历史数据同步完成回调[TEB_HISTROYDATA_SYNCCOMPLETED](https://doc.qcloudtiw.com/web/TEduBoard.html#.event:TEB_HISTROYDATA_SYNCCOMPLETED)
-
-- 注意：针对白板行为的操作，一定要在该事件回调完成后再进行操作，否则无效。如翻页，设置背景色等行为
-
-```
-teduBoard.on(TEduBoard.EVENT.TEB_HISTROYDATA_SYNCCOMPLETED, () => {
-   console.log('======================:  ', 'TEB_HISTROYDATA_SYNCCOMPLETED');
 });
 ```
 
@@ -531,24 +552,5 @@ teduBoard.on(TEduBoard.EVENT.TEB_VIDEO_STATUS_CHANGED, (data) => {
 ```
 teduBoard.on(TEduBoard.EVENT.TEB_VODEXTPARAM, (data) => {
    console.log('======================:  ', 'TEB_VODEXTPARAM', data);
-});
-```
-
-## TEduBoard.EVENT.TEB_WARNING
-
-> 白板警告事件[TEB_WARNING](https://doc.qcloudtiw.com/web/TEduBoard.html#.event:TEB_WARNING)
-
-- 注意：1. 白板警告事件一定要监听
-- 注意：2. 警告事件不是致命事件，不影响白板运行，但需要您针对警告码找出原因并修复。
-
-
-| 属性 | 类型 | 描述 |
-| --- | --- | --- |
-| warnCode |	number |	警告码 |
-| warnMessage |	string |	警告描述 |
-
-```
-teduBoard.on(TEduBoard.EVENT.TEB_WARNING, (warnCode, warnMessage) => {
-   console.log('======================:  ', 'TEB_WARNING', ' warnCode:', warnCode, ' warnMessage:', warnMessage);
 });
 ```

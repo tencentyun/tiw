@@ -53,6 +53,18 @@
 可用 initParam.timSync 指定是否使用腾讯云IMSDK进行实时数据同步 initParam.timSync == true 时，会尝试反射调用腾讯云 IMSDK 作为信令通道进行实时数据收发（只实现消息收发，初始化、进房等操作需要用户自行实现），目前仅支持 IMSDK 4.3.118 及以上版本 
 
 
+### setUserInfo:
+设置用户信息 
+``` Objective-C
+- (void)setUserInfo:(TEduBoardUserInfo *)userInfo 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| userInfo | TEduBoardUserInfo * |  |
+
+
 ### unInit
 反初始化白板 
 ``` Objective-C
@@ -180,16 +192,17 @@ NSString 版本号字符串
 
 ## 涂鸦相关接口
 
-### setAccessibleUsers:
+### setAccessibleUsers:operationType:
 设置允许操作哪些用户绘制的图形 
 ``` Objective-C
-- (void)setAccessibleUsers:(NSArray< NSString * > *)users 
+- (void)setAccessibleUsers:(NSArray< NSString * > *)users operationType:(NSArray< NSNumber * > *)operationType 
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| users | NSArray< NSString * > * | 指定允许操作的用户集，为 nullptr 表示不加限制 |
+| users | NSArray< NSString * > * | 指定允许操作的用户集，为 nullptr 表示不加限制  |
+| operationType | NSArray< NSNumber * > * | 指定允许的操作类型TEduBoardAccessibleOperation(选填) |
 
 #### 介绍
 该接口会产生以下影响：
@@ -260,6 +273,18 @@ NSString 版本号字符串
 
 #### 介绍
 白板页创建以后的默认背景色由 SetDefaultBackgroundColor 接口设定 
+
+
+### setBoardContainerColor:
+设置白板父容器的背景色 
+``` Objective-C
+- (void)setBoardContainerColor:(TEColor *)color 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| color | TEColor * | 要设置的背景色  |
 
 
 ### getBackgroundColor
@@ -544,10 +569,10 @@ NSString 版本号字符串
 | cursorIcon | TEduBoardCursorIcon * | 要设置的鼠标样式  |
 
 
-### setToolTypeTitle:style:
+### setToolTypeTitle:style:toolType:
 设置画笔和激光笔工具提示语 
 ``` Objective-C
-- (void)setToolTypeTitle:(NSString *)title style:(TEduBoardToolTypeTitleStyle *)style 
+- (void)setToolTypeTitle:(NSString *)title style:(TEduBoardToolTypeTitleStyle *)style toolType:(TEduBoardToolType)toolType 
 ```
 #### 参数
 
@@ -555,401 +580,7 @@ NSString 版本号字符串
 | --- | --- | --- |
 | title | NSString * | 提示语  |
 | style | TEduBoardToolTypeTitleStyle * | 如果为空，则使用默认样式  |
-
-
-
-## 白板页操作接口
-
-### addBoardWithBackgroundImage:
-增加一页白板 
-``` Objective-C
-- (NSString *)addBoardWithBackgroundImage:(NSString *)url 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| url | NSString * | 要使用的背景图片 URL，编码格式为 UTF8，为 nullptr 表示不指定背景图片  |
-
-#### 返回
-白板ID 
-
-#### 警告
-白板页会被添加到默认文件（文件 ID 为::DEFAULT)，自行上传的文件无法添加白板页
-
-#### 介绍
-返回值内存由SDK内部管理，用户不需要自己释放 
-
-
-### deleteBoard:
-删除一页白板 
-``` Objective-C
-- (void)deleteBoard:(NSString *)boardId 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| boardId | NSString * | 要删除的白板 ID，为 nullptr 表示删除当前页  |
-
-#### 警告
-只允许删除默认文件（文件 ID 为::DEFAULT）内的白板页，且默认白板页（白板 ID 为::DEFAULT）无法删除 
-
-
-### prevStep
-上一步 每个 Step 对应 PPT 的一个动画效果，若当前没有已展示的动画效果，则该接口调用会导致向前翻页 
-``` Objective-C
-- (void)prevStep
-```
-
-### nextStep
-下一步 
-``` Objective-C
-- (void)nextStep
-```
-#### 介绍
-每个 Step 对应 PPT 的一个动画效果，若当前没有未展示的动画效果，则该接口调用会导致向后翻页 
-
-
-### preBoard
-向前翻页 
-``` Objective-C
-- (void)preBoard
-```
-#### 介绍
-若当前白板页为当前文件的第一页，则该接口调用无效 
-
-
-### nextBoard
-向后翻页 
-``` Objective-C
-- (void)nextBoard
-```
-#### 介绍
-若当前白板页为当前文件的最后一页，则该接口调用无效 
-
-
-### gotoBoard:
-跳转到指定白板页 
-``` Objective-C
-- (void)gotoBoard:(NSString *)boardId 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| boardId | NSString * | 要跳转到的白板页 ID |
-
-#### 介绍
-允许跳转到任意文件的白板页 
-
-
-### preBoard:
-向前翻页 
-``` Objective-C
-- (void)preBoard:(BOOL)resetStep 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| resetStep | BOOL | 指定翻到指定页以后是否重置 PPT 动画步数 |
-
-#### 介绍
-若当前白板页为当前文件的第一页，则该接口调用无效 
-
-
-### nextBoard:
-向后翻页 
-``` Objective-C
-- (void)nextBoard:(BOOL)resetStep 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| resetStep | BOOL | 指定翻到指定页以后是否重置 PPT 动画步数 |
-
-#### 介绍
-若当前白板页为当前文件的最后一页，则该接口调用无效 
-
-
-### gotoBoard:resetStep:
-跳转到指定白板页 
-``` Objective-C
-- (void)gotoBoard:(NSString *)boardId resetStep:(BOOL)resetStep 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| boardId | NSString * | 要跳转到的白板页 ID  |
-| resetStep | BOOL | 指定翻到指定页以后是否重置 PPT 动画步数 |
-
-#### 介绍
-允许跳转到任意文件的白板页 
-
-
-### getCurrentBoard
-获取当前白板页 ID 
-``` Objective-C
-- (NSString *)getCurrentBoard
-```
-#### 返回
-当前白板页 ID
-
-#### 介绍
-返回值内存由 SDK 内部管理，用户不需要自己释放 
-
-
-### getBoardList
-获取所有文件的白板列表 
-``` Objective-C
-- (NSArray< NSString * > *)getBoardList
-```
-#### 返回
-所有文件的白板列表 
-
-
-### setBoardRatio:
-设置当前白板页宽高比 
-``` Objective-C
-- (void)setBoardRatio:(NSString *)ratio 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| ratio | NSString * | 要设置的白板宽高比 |
-
-#### 介绍
-格式如: "4:3"、"16:9" 
-
-
-### getBoardRatio
-获取当前白板页宽高比 
-``` Objective-C
-- (NSString *)getBoardRatio
-```
-#### 返回
-白板宽高比，格式与 SetBoardRatio 接口参数格式一致 
-
-
-### setBoardScale:
-设置当前白板页缩放比例 
-``` Objective-C
-- (void)setBoardScale:(UInt32)scale 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| scale | UInt32 | 要设置的白板缩放比例 |
-
-#### 介绍
-支持范围: [100，1600]，实际缩放比为: scale / 100 
-
-
-### getBoardScale
-获取当前白板页缩放比例 
-``` Objective-C
-- (UInt32)getBoardScale
-```
-#### 返回
-白板缩放比例，格式与 SetBoardScale 接口参数格式一致 
-
-
-### setBoardContentFitMode:
-设置白板内容自适应模式 
-``` Objective-C
-- (void)setBoardContentFitMode:(TEduBoardContentFitMode)mode 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| mode | TEduBoardContentFitMode | 要设置的白板内容自适应模式 |
-
-#### 介绍
-设置自适应模式后会影响所有后续白板内容操作,受影响接口包括：AddTranscodeFile 
-
-
-### getBoardContentFitMode
-获取白板内容自适应模式 
-``` Objective-C
-- (TEduBoardContentFitMode)getBoardContentFitMode
-```
-#### 返回
-白板内容自适应模式 
-
-
-### addImageElement:
-添加图片资源 
-``` Objective-C
-- (void)addImageElement:(NSString *)url 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| url | NSString * | 【必填】图片地址/Users/kennethmiao/Documents/source/doxy_md_gen/ios/TEduBoardDef.h 支持 png/jpg/gif/svg 格式的本地和网络图片，当 URL 是一个有效的本地文件地址时，该文件会被自动上传到 COS。上传进度回调 onTEBFileUploadProgress，上传结果回调 onTEBFileUploadStatus  |
-
-
-### addElement:type:
-添加白板元素 
-``` Objective-C
-- (NSString *)addElement:(NSString *)url type:(TEduBoardElementType)type 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| url | NSString * | 网页或者图片的 url，只支持 https 协议的网址或者图片 url  |
-| type | TEduBoardElementType | 元素类型，当设置TEDU_BOARD_ELEMENT_IMAGE时，等价于addImageElement方法  |
-
-#### 返回
-元素ID 
-
-#### 警告
-（1）当 type = TEDU_BOARD_ELEMENT_IMAGE，支持 png、jpg、gif、svg 格式的本地和网络图片，当 url 是一个有效的本地文件地址时，该文件会被自动上传到 COS，上传进度回调 onTEBFileUploadStatus （2）当 type = TEDU_BOARD_ELEMENT_CUSTOM_GRAPH，仅支持网络 url，请与自定义图形工具 TEDU_BOARD_TOOL_TYPE_BOARD_CUSTOM_GRAPH 配合使用 （3）当 type = TEDU_BOARD_ELEMENT_AUDIO 或 TEDU_BOARD_ELEMENT_GLOBAL_AUDIO，仅支持网络 url 
-
-
-### removeElement:
-删除白板元素 
-``` Objective-C
-- (BOOL)removeElement:(NSString *)elementId 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| elementId | NSString * | 元素 ID  |
-
-#### 返回
-删除是否成功 
-
-
-### setNextTextInput:focus:
-预设文本工具内容 
-``` Objective-C
-- (void)setNextTextInput:(NSString *)input focus:(BOOL)focus 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| input | NSString * | 预设文本内容，取消预设则设置为空  |
-| focus | BOOL | 是否继续保持焦点  |
-
-
-### setZoomCursorIcon:zoomOutCursorIcon:
-预设文本工具内容 
-``` Objective-C
-- (void)setZoomCursorIcon:(TEduBoardCursorIcon *)zoomIn zoomOutCursorIcon:(TEduBoardCursorIcon *)zoomOut 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| zoomIn | TEduBoardCursorIcon * | 放大工具图标  |
-| zoomOut | TEduBoardCursorIcon * | 缩小工具图标  |
-
-#### 警告
-该接口只在桌面端支持 
-
-
-### setHandwritingEnable:
-设置白板是否开启笔锋 
-``` Objective-C
-- (void)setHandwritingEnable:(BOOL)enable 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| enable | BOOL | 【必填】是否开启，true 表示开启，false 表示关闭 |
-
-#### 介绍
-白板创建后默认为关闭 
-
-
-### isHandwritingEnable
-获取白板是否开启笔锋 
-``` Objective-C
-- (BOOL)isHandwritingEnable
-```
-#### 返回
-是否开启笔锋 
-
-
-### refresh
-刷新当前页白板，触发 onTEBRefresh 回调 
-``` Objective-C
-- (void)refresh
-```
-#### 警告
-如果当前白板包含 PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
-
-
-### syncAndReload
-同步本地发送失败的数据到远端并刷新本地数据 
-``` Objective-C
-- (void)syncAndReload
-```
-#### 警告
-Reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
-
-#### 介绍
-接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制： （1）仅支持2.4.9及以上版本 （2）如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION 
-
-
-### snapshot:
-白板快照 
-``` Objective-C
-- (void)snapshot:(TEduBoardSnapshotInfo *)info 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| info | TEduBoardSnapshotInfo * | 快照信息  |
-
-
-### setScaleAnchor:yRatio:
-设置缩放锚点 
-``` Objective-C
-- (void)setScaleAnchor:(CGFloat)xRatio yRatio:(CGFloat)yRatio 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| xRatio | CGFloat | 距离白板左边位置，取值【0, 1】  |
-| yRatio | CGFloat | 距离白板顶部位置，取值【0, 1】  |
-
-
-### setRemoteCursorVisible:
-设置远端画笔在本地是否可见 
-``` Objective-C
-- (void)setRemoteCursorVisible:(BOOL)visible 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| visible | BOOL | 是否可见  |
-
-
-### setScaleToolRatio:
-设置缩放工具的缩放比例 
-``` Objective-C
-- (void)setScaleToolRatio:(NSInteger)scale 
-```
-#### 参数
-
-| 参数 | 类型 | 含义 |
-| --- | --- | --- |
-| scale | NSInteger | 最小缩放步长  |
+| toolType | TEduBoardToolType | TEduBoardToolType工具类型  |
 
 
 
@@ -1439,5 +1070,454 @@ play/pause/seek 接口以及控制栏事件的触发是否影响远端，默认�
 
 
 
+
+### addBoard:model:type:
+增加一页白板 
+``` Objective-C
+- (NSString *)addBoard:(NSString *)url model:(TEduBoardImageFitMode)model type:(TEduBoardBackgroundType)type 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| url | NSString * | 【可选】要使用的背景图片url，为 null 表示不指定背景图片，只支持https协议的图片url  |
+| model | TEduBoardImageFitMode | 【可选】要使用的图片填充对齐模式TEduBoardImageFitMode，当设置url时有效  |
+| type | TEduBoardBackgroundType | 【可选】背景类型，TEduBoardBackgroundType  |
+
+#### 警告
+1、白板页会被添加到默认文件（文件 ID 为::DEFAULT)，自行上传的文件无法添加白板页; 
+2、触发 TEduBoard.EVEN.TEB_ADDBOARD 事件
+
+#### 介绍
+返回值内存由SDK内部管理，用户不需要自己释放 
+
+
+### deleteBoard:
+删除一页白板 
+``` Objective-C
+- (void)deleteBoard:(NSString *)boardId 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| boardId | NSString * | 要删除的白板 ID，为 nullptr 表示删除当前页  |
+
+#### 警告
+只允许删除默认文件（文件 ID 为::DEFAULT）内的白板页，且默认白板页（白板 ID 为::DEFAULT）无法删除 
+
+
+### prevStep
+上一步 每个 Step 对应 PPT 的一个动画效果，若当前没有已展示的动画效果，则该接口调用会导致向前翻页 
+``` Objective-C
+- (void)prevStep
+```
+
+### nextStep
+下一步 
+``` Objective-C
+- (void)nextStep
+```
+#### 介绍
+每个 Step 对应 PPT 的一个动画效果，若当前没有未展示的动画效果，则该接口调用会导致向后翻页 
+
+
+### preBoard
+向前翻页 
+``` Objective-C
+- (void)preBoard
+```
+#### 介绍
+若当前白板页为当前文件的第一页，则该接口调用无效 
+
+
+### nextBoard
+向后翻页 
+``` Objective-C
+- (void)nextBoard
+```
+#### 介绍
+若当前白板页为当前文件的最后一页，则该接口调用无效 
+
+
+### gotoBoard:
+跳转到指定白板页 
+``` Objective-C
+- (void)gotoBoard:(NSString *)boardId 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| boardId | NSString * | 要跳转到的白板页 ID |
+
+#### 介绍
+允许跳转到任意文件的白板页 
+
+
+### preBoard:
+向前翻页 
+``` Objective-C
+- (void)preBoard:(BOOL)resetStep 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| resetStep | BOOL | 指定翻到指定页以后是否重置 PPT 动画步数 |
+
+#### 介绍
+若当前白板页为当前文件的第一页，则该接口调用无效 
+
+
+### nextBoard:
+向后翻页 
+``` Objective-C
+- (void)nextBoard:(BOOL)resetStep 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| resetStep | BOOL | 指定翻到指定页以后是否重置 PPT 动画步数 |
+
+#### 介绍
+若当前白板页为当前文件的最后一页，则该接口调用无效 
+
+
+### gotoBoard:resetStep:
+跳转到指定白板页 
+``` Objective-C
+- (void)gotoBoard:(NSString *)boardId resetStep:(BOOL)resetStep 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| boardId | NSString * | 要跳转到的白板页 ID  |
+| resetStep | BOOL | 指定翻到指定页以后是否重置 PPT 动画步数 |
+
+#### 介绍
+允许跳转到任意文件的白板页 
+
+
+### getCurrentBoard
+获取当前白板页 ID 
+``` Objective-C
+- (NSString *)getCurrentBoard
+```
+#### 返回
+当前白板页 ID
+
+#### 介绍
+返回值内存由 SDK 内部管理，用户不需要自己释放 
+
+
+### getBoardList
+获取所有文件的白板列表 
+``` Objective-C
+- (NSArray< NSString * > *)getBoardList
+```
+#### 返回
+所有文件的白板列表 
+
+
+### setBoardRatio:
+设置当前白板页宽高比 
+``` Objective-C
+- (void)setBoardRatio:(NSString *)ratio 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| ratio | NSString * | 要设置的白板宽高比 |
+
+#### 介绍
+格式如: "4:3"、"16:9" 
+
+
+### getBoardRatio
+获取当前白板页宽高比 
+``` Objective-C
+- (NSString *)getBoardRatio
+```
+#### 返回
+白板宽高比，格式与 SetBoardRatio 接口参数格式一致 
+
+
+### setBoardScale:
+设置当前白板页缩放比例 
+``` Objective-C
+- (void)setBoardScale:(UInt32)scale 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| scale | UInt32 | 要设置的白板缩放比例 |
+
+#### 介绍
+支持范围: [100，1600]，实际缩放比为: scale / 100 
+
+
+### getBoardScale
+获取当前白板页缩放比例 
+``` Objective-C
+- (UInt32)getBoardScale
+```
+#### 返回
+白板缩放比例，格式与 SetBoardScale 接口参数格式一致 
+
+
+### setBoardContentFitMode:
+设置白板内容自适应模式 
+``` Objective-C
+- (void)setBoardContentFitMode:(TEduBoardContentFitMode)mode 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| mode | TEduBoardContentFitMode | 要设置的白板内容自适应模式 |
+
+#### 介绍
+设置自适应模式后会影响所有后续白板内容操作,受影响接口包括：AddTranscodeFile 
+
+
+### getBoardContentFitMode
+获取白板内容自适应模式 
+``` Objective-C
+- (TEduBoardContentFitMode)getBoardContentFitMode
+```
+#### 返回
+白板内容自适应模式 
+
+
+### addElement:type:options:
+添加白板元素， 会触发 onTEBAddElement 事件 
+``` Objective-C
+- (NSString *)addElement:(NSString *)url type:(TEduBoardElementType)type options:(TEduBoardAddElementOptions *)options 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| url | NSString * | 网页或者图片的 url，只支持 https 协议的网址或者图片 url  |
+| type | TEduBoardElementType | 元素类型，当设置TEDU_BOARD_ELEMENT_IMAGE时，等价于addImageElement方法  |
+| options | TEduBoardAddElementOptions * | 配置参数 |
+
+#### 返回
+元素ID 
+
+#### 警告
+（1）当 type = TEDU_BOARD_ELEMENT_IMAGE，支持 png、jpg、gif、svg 格式的本地和网络图片，当 url 是一个有效的本地文件地址时，该文件会被自动上传到 COS，上传进度回调 onTEBFileUploadStatus （2）当 type = TEDU_BOARD_ELEMENT_CUSTOM_GRAPH，仅支持网络 url，请与自定义图形工具 TEDU_BOARD_TOOL_TYPE_BOARD_CUSTOM_GRAPH 配合使用 （3）当 type = TEDU_BOARD_ELEMENT_AUDIO 或 TEDU_BOARD_ELEMENT_GLOBAL_AUDIO，仅支持网络 url （4）当 type = TEDU_BOARD_ELEMENT_MATH_BOARD 或 TEDU_BOARD_ELEMENT_MATH_GRAPH,请使用addElementWithBoard或 （5）addElement不支持涂鸦元素TEDU_BOARD_ELEMENT_GRAFFITI_LINE ~ TEDU_BOARD_ELEMENT_GRAFFITI_GRAPH_OVAL 
+
+
+### addElementWithBoard:options:
+添加一个数学函数画板 
+``` Objective-C
+- (NSString *)addElementWithBoard:(TEduBoardElementMathBoard *)mathBoard options:(TEduBoardAddElementOptions *)options 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| mathBoard | TEduBoardElementMathBoard * | 【必填】数学函数画板  |
+| options | TEduBoardAddElementOptions * | 配置参数 会触发onTEBAddElement回调  |
+
+
+### addElementWithGraph:options:
+添加一个数学函数图像 
+``` Objective-C
+- (NSString *)addElementWithGraph:(TEduBoardElementMathGraph *)mathGraph options:(TEduBoardAddElementOptions *)options 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| mathGraph | TEduBoardElementMathGraph * | 【必填】数学函数图像  |
+| options | TEduBoardAddElementOptions * | 配置参数 会触发onTEBAddElement回调  |
+
+
+### removeElement:
+删除白板元素 
+``` Objective-C
+- (BOOL)removeElement:(NSString *)elementId 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | NSString * | 元素 ID  |
+
+#### 返回
+删除是否成功 
+
+
+### setNextTextInput:focus:
+预设文本工具内容 
+``` Objective-C
+- (void)setNextTextInput:(NSString *)input focus:(BOOL)focus 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| input | NSString * | 预设文本内容，取消预设则设置为空  |
+| focus | BOOL | 是否继续保持焦点  |
+
+
+### setZoomCursorIcon:zoomOutCursorIcon:
+预设文本工具内容 
+``` Objective-C
+- (void)setZoomCursorIcon:(TEduBoardCursorIcon *)zoomIn zoomOutCursorIcon:(TEduBoardCursorIcon *)zoomOut 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| zoomIn | TEduBoardCursorIcon * | 放大工具图标  |
+| zoomOut | TEduBoardCursorIcon * | 缩小工具图标  |
+
+#### 警告
+该接口只在桌面端支持 
+
+
+### setHandwritingEnable:
+设置白板是否开启笔锋 
+``` Objective-C
+- (void)setHandwritingEnable:(BOOL)enable 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| enable | BOOL | 【必填】是否开启，true 表示开启，false 表示关闭 |
+
+#### 介绍
+白板创建后默认为关闭 
+
+
+### isHandwritingEnable
+获取白板是否开启笔锋 
+``` Objective-C
+- (BOOL)isHandwritingEnable
+```
+#### 返回
+是否开启笔锋 
+
+
+### refresh
+刷新当前页白板，触发 onTEBRefresh 回调 
+``` Objective-C
+- (void)refresh
+```
+#### 警告
+如果当前白板包含 PPT/H5/图片/视频时，刷新白板将会触发对应的回调 
+
+
+### syncAndReload
+同步本地发送失败的数据到远端并刷新本地数据 
+``` Objective-C
+- (void)syncAndReload
+```
+#### 警告
+Reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
+
+#### 介绍
+接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制： （1）仅支持2.4.9及以上版本 （2）如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION 
+
+
+### snapshot:
+白板快照 
+``` Objective-C
+- (void)snapshot:(TEduBoardSnapshotInfo *)info 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| info | TEduBoardSnapshotInfo * | 快照信息  |
+
+
+### setScaleAnchor:yRatio:
+设置缩放锚点 
+``` Objective-C
+- (void)setScaleAnchor:(CGFloat)xRatio yRatio:(CGFloat)yRatio 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| xRatio | CGFloat | 距离白板左边位置，取值【0, 1】  |
+| yRatio | CGFloat | 距离白板顶部位置，取值【0, 1】  |
+
+
+### setRemoteCursorVisible:
+设置远端画笔在本地是否可见 
+``` Objective-C
+- (void)setRemoteCursorVisible:(BOOL)visible 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| visible | BOOL | 是否可见  |
+
+
+### setScaleToolRatio:
+设置缩放工具的缩放比例 
+``` Objective-C
+- (void)setScaleToolRatio:(NSInteger)scale 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| scale | NSInteger | 最小缩放步长  |
+
+
+### setEraseLayerLimit:
+设置橡皮擦单次擦除图层数量 
+``` Objective-C
+- (void)setEraseLayerLimit:(NSInteger)limit 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| limit | NSInteger | 擦除图层数量，默认为0，即不限制图层数量  |
+
+
+### setEraseLayerType:
+限制橡皮擦可擦除的白板元素类型 
+``` Objective-C
+- (void)setEraseLayerType:(NSArray< NSNumber * > *)typeArr 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| typeArr | NSArray< NSNumber * > * | 支持设置多个可擦除类型，整型数组  |
+
+
+### setPenAutoFittingMode:
+设置画笔自动拟合模式 
+``` Objective-C
+- (void)setPenAutoFittingMode:(TEduBoardPenFittingMode)mode 
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| mode | TEduBoardPenFittingMode | 画笔自动拟合模式  |
+
+
+### addSnapshotMark
+调用此接口可在后台生成当前白板的板书内容 
+``` Objective-C
+- (void)addSnapshotMark
+```
 
 

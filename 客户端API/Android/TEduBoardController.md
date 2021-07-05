@@ -80,6 +80,18 @@ void uninit()
 在销毁白板对象后，将会结束计费。 
 
 
+### setProxyServer
+设置代理服务器 
+``` Java
+void setProxyServer(HashMap< String, String > serverMaps)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| serverMaps | HashMap< String, String > | key 类型为TEduBoardServiceType example:key:TEduBoard.TEduBoardServiceType.ALL , value: [https://proxy.your-domain.com:your-port](https://proxy.your-domain.com:your-port)  |
+
+
 ### getBoardRenderView
 获取白板渲染 View 
 ``` Java
@@ -201,23 +213,66 @@ boolean isDrawEnable()
 是否允许涂鸦，true 表示白板可以涂鸦，false 表示白板不能涂鸦 
 
 
-### setAccessibleUsers
-设置允许操作哪些用户绘制的图形 
+### addSnapshotMark
+生成板书图片 
 ``` Java
-void setAccessibleUsers(List< String > users)
+void addSnapshotMark()
+```
+
+### setPenAutoFittingMode
+设置画笔自动拟合模式 
+``` Java
+void setPenAutoFittingMode(String mode)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| users | List< String > | 指定允许操作的用户集，为 null 表示不加限制 |
+| mode | String | TEduBoardPenFittingMode  |
 
-#### 介绍
-该接口会产生以下影响：
+
+### setAccessibleUsers
+设置允许操作哪些用户绘制的图形 
+``` Java
+void setAccessibleUsers(List< String > users, List< Integer > operationTypes, List< String > elementTypes)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| users | List< String > | 必填， 指定允许操作的用户集，为 null 表示不加限制  |
+| operationTypes | List< Integer > | 选填， 指令允许的操作类型(TEduBoardAccessibleOperation)  |
+| elementTypes | List< String > | 选填， 指定可操作的对象 该接口会产生以下影响：
 1. ERASER 工具只能擦除 users 参数列出的用户绘制的涂鸦，无法擦除其他人绘制的涂鸦
 2. POINTSELECT、SELECT 工具只能选中 users 参数列出的用户绘制的涂鸦，无法选中其他人绘制的涂鸦
 3. clear 接口只能用于清空选中涂鸦以及 users 参数列出的用户绘制的涂鸦，无法清空背景及其他人绘制的涂鸦
-4. 白板包含的其他功能未在本列表明确列出者都可以确定不受本接口影响 
+4. 白板包含的其他功能未在本列表明确列出者都可以确定不受本接口影响  |
+
+
+### setSystemCursorEnable
+设置是否启用原生系统光标 
+``` Java
+void setSystemCursorEnable(boolean isEnable)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| isEnable | boolean |  |
+
+
+### setToolTypeTitle
+设置白板工具提示语text 
+``` Java
+void setToolTypeTitle(String text, TEduBoardToolTypeTitleStyle titleStyle, int toolType)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| text | String |  |
+| titleStyle | TEduBoardToolTypeTitleStyle |  |
+| toolType | int |  |
 
 
 ### setGlobalBackgroundColor
@@ -382,6 +437,19 @@ TEduBoardColor getTextColor()
 ```
 #### 返回
 文本颜色 
+
+
+### setTextValue
+设置文本组件内容 
+``` Java
+void setTextValue(String id, String text)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| id | String |  |
+| text | String |  |
 
 
 ### setTextSize
@@ -582,25 +650,51 @@ boolean isHandwritingEnable()
 是否开启笔锋 
 
 
+### setEraseLayerLimit
+设置橡皮擦单次擦除图层数量 
+``` Java
+void setEraseLayerLimit(int limit)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| limit | int | 默认为0，不限制图层数量  |
+
+
+### setEraseLayerType
+设置橡皮擦可擦除的白板元素类型 
+``` Java
+void setEraseLayerType(List< Integer > typeArray)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| typeArray | List< Integer > | TEduBoardErasableElementType  |
+
+
 
 ## 白板页操作接口
 
 ### addBoard
 增加一页白板 
 ``` Java
-String addBoard(String url)
+String addBoard(String url, int mode, int type)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| url | String | 要使用的背景图片 URL，编码格式为 UTF8，为 null 表示不指定背景图片  |
+| url | String | 可选。要使用的背景图片 URL，编码格式为 UTF8，为 null 表示不指定背景图片  |
+| mode | int | 可选，要使用的图片填充对齐模式，当设置url时有效 TEduBoardImageFitMode  |
+| type | int | 可选，背景类型， img或h5 TEduBoardBackgroundType  |
 
 #### 返回
 白板 ID 
 
 #### 警告
-白板页会被添加到默认文件（文件 ID 为::DEFAULT)，自行上传的文件无法添加白板页 
+白板页会被添加到默认文件（文件 fileId 为::DEFAULT)，自行上传的文件无法添加白板页 
 
 
 ### deleteBoard
@@ -615,7 +709,7 @@ void deleteBoard(String boardId)
 | boardId | String | 要删除的白板 ID，为 null 表示删除当前页  |
 
 #### 警告
-只允许删除默认文件（文件 ID 为::DEFAULT）内的白板页，且默认白板页（白板 ID 为::DEFAULT）无法删除 
+只允许删除默认文件（文件 fileId 为::DEFAULT）内的白板页，且默认白板页（白板 ID 为::DEFAULT）无法删除 
 
 
 ### prevStep
@@ -778,6 +872,43 @@ int getBoardScale()
 白板缩放比例，格式与 SetBoardScale 接口参数格式一致 
 
 
+### setScaleAnchor
+对当前白板进行移动 
+``` Java
+void setScaleAnchor(float xRatio, float yRatio)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| xRatio | float | 左或右，小于0按照0处理，大于1按照1处理  |
+| yRatio | float | 上或下，小于0按照0处理，大于1按照1处理  |
+
+
+### setScaleToolRatio
+设置缩放工具缩放比例 
+``` Java
+void setScaleToolRatio(int ratio)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| ratio | int |  |
+
+
+### setRemoteCursorVisible
+设置远端画笔在本地是否课件 
+``` Java
+void setRemoteCursorVisible(boolean isShow)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| isShow | boolean | true: 可见 false: 不可见  |
+
+
 ### setBoardContentFitMode
 设置白板内容自适应模式 
 ``` Java
@@ -817,7 +948,7 @@ void refresh()
 void syncAndReload()
 ```
 #### 警告
-Reload 等同于重新加载历史数据，会触发白板初始化时除 onTEBInit 之外的所有回调。 
+Reload等同于重新加载历史数据，会触发白板初始化时除onTEBInit之外的所有回调。 
 
 #### 介绍
 接口用途：此接口主要用于网络恢复后，同步本地数据到远端，拉取远端数据到本地 调用时机：在网络恢复后调用 使用限制： （1）仅支持2.4.9及以上版本 （2）如果历史数据还没有加载完成，则不允许重复调用，否则回调告警 TEDU_BOARD_WARNING_ILLEGAL_OPERATION 
@@ -838,10 +969,10 @@ String addImagesFile(List< String > urls)
 | urls | List< String > | 要使用的图片URL列表，编码格式为 UTF8  |
 
 #### 返回
-新增加文件 Id 
+新增加文件 fileId
 
 #### 警告
-当传入文件的 URL 重复时，返回 URL 对应的 文件 ID 
+当传入文件的 URL 重复时，返回 URL 对应的 文件 fileId 
 
 
 ### applyFileTranscode
@@ -894,11 +1025,11 @@ String addTranscodeFile(final TEduBoardTranscodeFileResult result, boolean needS
 | needSwitch | boolean | 是否切换到该文件  |
 
 #### 返回
-文件 ID 
+文件 fileId 
 
 #### 警告
-当传入文件的 URL 重复时，返回 URL 对应的 文件 ID 
-在收到对应的 onTEBAddTranscodeFile 回调前，无法用返回的文件 ID 查询到文件信息 
+当传入文件的 URL 重复时，返回 URL 对应的 文件 fileId
+在收到对应的 onTEBAddTranscodeFile 回调前，无法用返回的文件 fileId 查询到文件信息 
 
 #### 介绍
 TEduBoardTranscodeFileResult 的字段信息主要来自：
@@ -915,29 +1046,46 @@ String addElement(int type, String url)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| type | int | 元素类型，当设置 TEDU_BOARD_ELEMENT_IMAGE时，等价于 addImageElement 方法  |
-| url | String | 网页或者图片的 url，只支持 https 协议的网址或者图片 url  |
-
-#### 返回
-元素ID 
-
-#### 警告
-（1）当 type = TEDU_BOARD_ELEMENT_IMAGE，支持 png、jpg、gif、svg 格式的本地和网络图片，当 url 是一个有效的本地文件地址时，该文件会被自动上传到 COS，上传进度回调 onTEBFileUploadStatus （2）当 type = TEDU_BOARD_ELEMENT_CUSTOM_GRAPH，仅支持网络 url，请与自定义图形工具 TEDU_BOARD_TOOL_TYPE_BOARD_CUSTOM_GRAPH 配合使用 
+| type | int |  |
+| url | String |  |
 
 
-### addImageElement
-添加图片资源 
+### addElementMathCanvas
+添加数学函数画板 
 ``` Java
-void addImageElement(String url)
+String addElementMathCanvas(int type, TEduBoardMathCanvas mathCanvas)
 ```
 #### 参数
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| url | String | 【必填】图片地址  |
+| type | int |  |
+| mathCanvas | TEduBoardMathCanvas |  |
 
-#### 警告
-该接口已废弃，请使用addElement接口代替 支持 png/jpg/gif/svg 格式的本地和网络图片，当 URL 是一个有效的本地文件地址时，该文件会被自动上传到 COS。上传进度回调 onTEBFileUploadProgress，上传结果回调 onTEBFileUploadStatus 
+
+### addElementFunctionGrapher
+添加数学函数图像 
+``` Java
+String addElementFunctionGrapher(int type, TEduBoardFunctionGrapher functionGrapher)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| type | int |  |
+| functionGrapher | TEduBoardFunctionGrapher |  |
+
+
+### removeElement
+删除白板元素 
+``` Java
+void removeElement(String id)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| id | String | 元素id  |
 
 
 ### deleteFile
@@ -949,10 +1097,10 @@ void deleteFile(String fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | String | 要删除的文件 ID |
+| fileId | String | 要删除的文件 fileId |
 
 #### 介绍
-文件 ID 为 nullptr 时表示当前文件，默认文件无法删除 
+文件 fileId 为 nullptr 时表示当前文件，默认文件无法删除 
 
 
 ### switchFile
@@ -964,9 +1112,9 @@ void switchFile(String fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | String | 要切换到的文件 ID  |
+| fileId | String | 要切换到的文件 fileId  |
 
->? 文件 ID 为必填项，为 null 或空字符串将导致文件切换失败 
+>? 文件 fileId 为必填项，为 null 或空字符串将导致文件切换失败 
 
 
 ### switchFile
@@ -978,23 +1126,23 @@ void switchFile(String fileId, String boardId, int stepIndex)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | String | 要切换到的文件 ID  |
+| fileId | String | 要切换到的文件 fileId  |
 | boardId | String | 切换文件并跳转到这个白板页  |
 | stepIndex | int | 跳转到白板页并切换到这个动画  |
 
 #### 警告
-该接口仅可用于文件切换，如果传入的 fileId 为当前文件 ID，SDK 会忽略其它参数，不做任何操作 
+该接口仅可用于文件切换，如果传入的 fileId 为当前文件 fileId，SDK 会忽略其它参数，不做任何操作 
 
->? 文件 ID 为必填项，为 null 或空字符串将导致文件切换失败 
+>? 文件 fileId 为必填项，为 null 或空字符串将导致文件切换失败 
 
 
 ### getCurrentFile
-获取当前文件 ID 
+获取当前文件 fileId
 ``` Java
 String getCurrentFile()
 ```
 #### 返回
-当前文件 ID 
+当前文件 fileId
 
 
 ### getFileInfoList
@@ -1021,6 +1169,18 @@ TEduBoardFileInfo getFileInfo(String fid)
 文件信息 
 
 
+### getBoardElementList
+获取白板当中所有元素 
+``` Java
+List<TEduBoardElementInfo> getBoardElementList(String boardId)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| boardId | String | 如果为空则获取当前白板所有元素  |
+
+
 ### getFileBoardList
 获取指定文件的白板 ID 列表 
 ``` Java
@@ -1030,7 +1190,7 @@ List<String> getFileBoardList(String fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | String | 文件 ID  |
+| fileId | String | 文件 fileId  |
 
 #### 返回
 白板 ID 列表 
@@ -1045,7 +1205,7 @@ void clearFileDraws(String fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | String | 文件 ID  |
+| fileId | String | 文件 fileId  |
 
 
 ### getThumbnailImages
@@ -1057,7 +1217,7 @@ List<String> getThumbnailImages(String fileId)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| fileId | String | 文件 ID  |
+| fileId | String | 文件 fileId  |
 
 #### 返回
 缩略图 URL 列表 
@@ -1077,10 +1237,10 @@ String addVideoFile(String url)
 | url | String | 文件播放地址  |
 
 #### 返回
-文件 ID 
+文件 fileId
 
 #### 警告
-当传入文件的 URL 重复时，返回 URL 对应的 文件 ID 
+当传入文件的 URL 重复时，返回 URL 对应的 文件 fileId 
 在 TBS 环境下，受限于 X5 内核和视频资源I帧间隔，在 Android 平台下无法精准同步。例如：10秒的视频，I帧间隔5秒，seek 到4秒位置，在 TBS 上从0秒开始播放。 移动端支持 mp4/m3u8，桌面端支持 mp4/m3u8/flv/rtmp；触发状态改变回调 onTEBVideoStatusChange 
 
 
@@ -1186,6 +1346,92 @@ void stopSyncVideoStatus()
 只对当前文件有效 
 
 
+### enableAudioControl
+是否启用音频控制面板 
+``` Java
+void enableAudioControl(boolean isEnable)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| isEnable | boolean | 启用或禁止  |
+
+
+### playAudio
+播放音频 
+``` Java
+void playAudio(String elementId)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | String | addElement返回的元素ID  |
+
+
+### pauseAudio
+暂停音频 
+``` Java
+void pauseAudio(String elementId)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | String | addElement返回的元素ID  |
+
+
+### seekAudio
+音频进度拖动 
+``` Java
+void seekAudio(String elementId, float time)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | String | 调用addElement返回的元素ID  |
+| time | float | 播放进度  |
+
+
+### setAudioVolume
+设置音量 
+``` Java
+void setAudioVolume(String elementId, float volume)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | String | 元素ID  |
+| volume | float | 音频音量 ，取值范围[0-1]  |
+
+
+### getAudioVolume
+获取音量 
+``` Java
+float getAudioVolume(String elementId)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| elementId | String | 元素ID  |
+
+
+### setSyncAudioStatusEnable
+是否同步本地音频操作状态到远端 
+``` Java
+void setSyncAudioStatusEnable(boolean isEnable)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| isEnable | boolean |  |
+
+
 ### addH5File
 添加 H5 页面 
 ``` Java
@@ -1198,7 +1444,7 @@ String addH5File(String url)
 | url | String | 【必填】网页地址  |
 
 #### 返回
-文件 ID 
+文件 fileId
 
 #### 警告
 只支持展示，不支持互动 
@@ -1214,5 +1460,37 @@ void snapshot(TEduBoardSnapshotInfo info)
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | info | TEduBoardSnapshotInfo | 快照信息  |
+
+
+
+
+
+
+### addBackupDomain
+添加资源主备域名映射 主备域名均需包含协议类型(支持http/https) 切换域名重试超时默认为5s 多次调用此接口，可为统一主域名添加多个备用域名。如果备用域名已在列表中则不再添加 当主域名不可用时，SDK将按从前往后的顺序从列表中选择一个备用域名并重试，请务必将可用性高的域名添加到列表前面 
+``` Java
+void addBackupDomain(String domain, String backup, int priority)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| domain | String | 主域名 (必填）  |
+| backup | String | 备用域名 (必填)  |
+| priority | int | 优先级，备用域名优先级相同时，按添加的顺序决定优先级，添加越前优先级越高  |
+
+
+### removeBackupDomain
+删除资源主备域名映射 
+``` Java
+void removeBackupDomain(String domain, String backup)
+```
+#### 参数
+
+| 参数 | 类型 | 含义 |
+| --- | --- | --- |
+| domain | String | 主域名 (必填）  |
+| backup | String | 备用域名 (必填)  |
+
 
 

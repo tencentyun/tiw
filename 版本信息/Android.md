@@ -1,3 +1,90 @@
+### 2.6.3.113 @ 2021.07.04
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.6.3.113.zip)    
+- 新增接口  
+  1. 设置画笔自动拟合模式(setPenAutoFittingMode)  
+  2. 生成板书图片(addSnapshotMark)  
+- 接口调整  
+  1. 添加白板(addBoard) 支持新增白板直接设置背景H5  
+- 新增初始化参数  
+  1. 白板离线告警时间间隔(offlineWarningTimeout)  
+- 新增事件  
+  1. 白板离线告警(TEB_OFFLINE_WARNING)  
+- 调整事件  
+  1. 增加元素回调(TEB_ADDELEMENT)  增加元素回调返回值新增元素类型type  
+
+- 优化  
+  1. 魔法笔功能  
+  2. 支持直接创建H5背景白板
+  3. 支持白板离线检测
+- bug修复  
+  1. 若干已知问题  
+  
+### 2.6.2.106 @ 2021.06.14
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.6.2.106.zip)    
+- 接口调整  
+  1.  addElementMathCanvas （添加数学函数画板）  
+  2.  addElementFunctionGrapher （添加数学函数图像)   
+- 调整初始化参数  
+  1. TEduBoardInitParam 增加mathGraphEnable（是否预加载数学函数工具库）  
+
+- 新增事件  
+  1. onTEBSelectElement (框选工具选中元素回调)  
+  2. onTEBMathGraphEvent （数学函数图像工具事件）  
+  3. onTEBZoomDragStatus (远端白板缩放移动状态回调)  
+ 
+- 废除接口  
+  1. addImageElement （添加图片元素)  
+ 
+- 优化  
+  1. 支持数学图像显示  
+  2. 支持h5元素移动，缩放，旋转  
+  3. 添加元素支持自定义位置，支持图片元素，h5元素，数学函数图像  
+  4. 移动端支持在任意工具下双指缩放白板   
+  
+- bug修复  
+  1.若干已知问题
+
+
+
+### 2.6.1.100 @ 2021.06.03
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.6.1.100.zip)  
+
+- 接口调整  
+  1. setToolTypeTitle  （设置工具的提示语）  
+  2. setAccessibleUsers (设置允许操作哪些用户绘制的图形)  
+  
+- 初始化参数:  
+  优化参数结构  
+
+- 新增接口：
+   1. 文本组件状态回调(onTEBTextElementStatusChange) 
+   2. 图片元素加载状态(onTEBImageElementStatusChanged)  
+   3. 白板文字工具异常警告(onTEBTextElementWarning)
+  
+
+### 2.6.0.94 @ 2021.05.08
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.6.0.94.zip)
+
+- 重要特性：
+    1. 支持最新的转码方案，具体请看[新文档转码](../开发指南/新文档转码/快速接入.md)
+
+- 新增接口：
+   1. 增加[设置单次擦除图层数量(setEraseLayerLimit)]
+   2. 增加[限制橡皮擦可擦除的数据类型(setEraseLayerType)]
+
+- 优化:  
+   1. 涂鸦绘制性能优化  
+   2. 激光笔移动性能优化  
+   3. 激光笔多端同步效果优化  
+   4. PPT、图片元素加载  
+   5. 涂鸦超出白板区域时框选范围错误  
+   6. 优化白板渲染时的重排、重绘操作  
+
+- bug修复:  
+   1. 截图时文本元素被iframe元素遮挡  
+   2. 直线碰撞检测计算错误  
+   3. 其他若干已知问题  
+
 ### 2.5.7.86 @ 2021.02.04
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.7.86.zip)
 
@@ -29,34 +116,31 @@
   4. 添加自定义元素时点选框范围错误
   5. 文本工具相关问题
   6. 其他若干已知问题
-  
- 
-
 ### 2.5.6.85 @ 2020.12.14
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.6.85.zip)
 
 - 新增接口：
-    1. 增加是否启用原生系统光标接口 setSystemCursorEnable
+    - 增加是否启用原生系统光标接口 setSystemCursorEnable
         - 开启该功能后画笔图标和激光笔图标将使用系统的光标样式来实现，画笔图标和激光笔图标在本地会有一丢丢的流畅度提升。
         - 开启该功能后会出现画笔图标和涂鸦有一点延迟现象，属于正常现象。
         - 开启该功能 Mac 端在一些情况下会导致光标变成默认的鼠标指针，如消息弹窗等行为，属于正常现象。
-    2. 增加设置画笔和激光笔工具的提示语接口 setToolTypeTitle
-    3. 支持音频元素
-        -新增音频 addElement
-        -播放音频 playAudio
-        -暂停音频 pauseAudio
-        -跳转进度 seekAudio
-        -是否启用音频控制面板 enableAudioControl
+    - 增加设置画笔和激光笔工具的提示语接口 setToolTypeTitle
+    - 支持音频元素
+        - 新增音频 addElement
+        - 播放音频 playAudio
+        - 暂停音频 pauseAudio
+        - 跳转进度 seekAudio
+        - 是否启用音频控制面板 enableAudioControl
 - 新增特性：
-    1. 点选和框选工具合并
-    2. 激光笔和画笔支持多人
+    - 点选和框选工具合并
+    - 激光笔和画笔支持多人
 - 体验优化：
-    1. 选择工具,橡皮擦选中精度优化。
+    - 选择工具，橡皮擦选中精度优化。
 
 ### 2.5.5.83 @ 2020.12.03 
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.5.83.zip)
-- Bug修复   
-  - 修复WebView远程调试漏洞
+- Bug 修复   
+  - 修复 WebView 远程调试漏洞
   - 替换日志模块，防止内存泄漏
 
 ### 2.5.5.71 @ 2020.11.09

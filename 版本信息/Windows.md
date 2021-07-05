@@ -1,3 +1,95 @@
+### 2.6.3.211 @ 2021-07-05
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.6.3.211.zip)
+
+- 新增接口：
+    设置画笔自动拟合模式(setPenAutoFittingMode)
+    
+- 调整接口：
+    添加白板(addBoard)
+    支持新增白板直接设置背景H5
+
+- 新增初始化参数：
+    白板离线告警时间间隔(offlineWarningTimeout)
+    
+- 新增事件：
+    白板离线告警(TEB_OFFLINE_WARNING)
+
+- 调整事件：
+    增加元素回调(TEB_ADDELEMENT)
+    增加元素回调返回值新增元素类型type
+
+- 优化：
+    魔法笔功能
+    支持直接创建H5背景白板
+    支持白板离线检测
+
+### 2.6.2.209 @ 2021-06-30
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.6.2.209.zip)
+
+
+- 调整接口
+   添加白板元素(addElement)
+  
+- 调整初始化参数：
+   初始化权限参数 mathGraphEnable，预加载数学函数图像库
+   初始化配置参数 scaleRange，白板缩放范围
+  
+- 新增事件：
+   框选工具选中元素回调(TEB_SELECTED_ELEMENTS)，原有的回调事件(TEB_RECTSELECTED)弃用
+   数学函数图像工具事件回调(TEB_MATH_GRAPH_EVENT)
+   远端白板缩放移动状态回调(TEB_ZOOM_DRAG_STATUS)
+   
+- 废除接口
+   废除添加图片元素(addImageElement)，请使用添加白板元素(addElement)
+   
+- 优化：
+   支持数学函数图像显示
+   支持H5元素移动、缩放、旋转
+   添加元素支持自定义位置，目前支持图片元素，H5元素，数学函数图像
+   移动端支持在任意工具下双指缩放白板
+    
+### 2.6.0. @ 2021-06-17
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.6.0..zip)
+
+- 新增接口
+    1. 新增设置代理服务器接口(SetProxyServer)
+    2. 新增限制橡皮擦单次擦除图层数量接口(SetEraseLayerLimit)
+    3. 新增限制橡皮擦可擦除的数据类型接口(SetEraseLayerType)
+  
+- 新增初始化参数
+    1. proxyServer：配置代理服务器
+    2. syncFps：信令同步频率
+
+### 2.5.7.195 @ 2021-04-07
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.7.195.zip)
+
+- 枚举值调整
+    1. 调整 TEDU_BOARD_ERROR_PATH_INVALID 枚举值
+    2. 调整 TEDU_BOARD_ERROR_WRITE_ERROR 枚举值
+    3. 调整 TEDU_BOARD_WARNING_TRTC_INVALID 枚举值
+    4. 新增 TEDU_BOARD_WARNING_GRAFFITI_LOST 枚举值
+    5. 新增 TEDU_BOARD_WARNING_CUSTOM_GRAPH_URL_NON_EXISTS 枚举值
+
+### 2.5.7.193 @ 2021-04-02
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.7.193.zip)
+
+- 新增接口
+    1. 新增设置文件缩放接口(SetFileScale)
+    2. 新增获取文件缩放接口(GetFileScale)
+    3. 新增限制橡皮擦单次点击擦除图层数量接口(SetEraseLayerLimit)
+
+### 2.5.7.191 @ 2021-02-25
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.7.191.zip)
+
+- Bug 修复
+    1. 白板每次创建时重新注册IM消息回调，避免IM重新初始化导致收不到白板消息
+
+### 2.5.7.187 @ 2021-02-22
+* [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.7.187.zip)
+
+- 新增接口
+    1. 增加清理白板SDK环境接口(ClearTEduBoardSDKEnv)
+
 ### 2.5.7.185 @ 2021-02-02
 * [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.7.185.zip)
 
@@ -31,7 +123,6 @@
 
 - Bug 修复
     - 修复偶现丢失收到的笔画问题
-
 ### 2.5.6.177 @ 2020-12-16
 * [单击下载 SDK](https://sdk.qcloudtiw.com/win32/sdk_bin_2.5.6.177.zip)
 
@@ -59,18 +150,18 @@
 
 - 新增特性：
     - 新增文字工具预设文本内容
-    - 优化白板缩放工具，支持鼠标滚轮缩放，焦点缩放，按shift键缩小交互方式
+    - 优化白板缩放工具，支持鼠标滚轮缩放，焦点缩放，按 shift 键缩小交互方式
     - 新增自定义图形工具
     - 新增自定义图形的元素类型
     - 新增白板放大后显示滚动条
 - Bug 修复
-    - 修复偶现画笔不消失的bug
+    - 修复偶现画笔不消失的 bug
 
 ### 2.5.4.152 @ 2020.10.15
 * [单击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.5.4.152.zip)
 
 - 新增工具类型
-    - 新增正圆，正方形工具类，同时支持椭圆工具和矩形工具按shift键画正圆和正方形
+    - 新增正圆，正方形工具类，同时支持椭圆工具和矩形工具按 shift 键画正圆和正方形
 - 优化
     - 优化橡皮擦擦除箭头工具不精确的问题
 - Bug 修复
@@ -90,12 +181,12 @@
     - 桌面端画笔使用时持续展示
     - 视频多次播放失败后回调 ERROR 状态
     - 日志上报相关优化
-
+    
 ### 2.5.2.132 @2020.08.07
 * [单击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.5.2.132.zip)
 
 - 新增回调
-    - 新增H5PPT状态回调 onTEBH5PPTStatusChanged
+    - 新增 H5PPT 状态回调 onTEBH5PPTStatusChanged
     
 ### 2.5.1.123 @2020.07.27
 * [单击下载 SDK](https://sdk.qcloudtiw.com/win32/binary_2.5.1.123.zip)
