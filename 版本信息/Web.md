@@ -1,3 +1,36 @@
+### 2.6.4 @ 2021.08.06
+* 链接地址：[https://res.qcloudtiw.com/board/2.6.4/TEduBoard.min.js]()
+
+- 新增接口
+  1. 设置几何图形类型 setMathGraphType，可用于几何画板绘制几何图形
+  2. 鼠标模式下的操作权限 setMouseToolBehavior
+  3. 设置白板备注信息 setBoardRemark
+  4. 获取白板备注信息 getBoardRemark
+
+- 新增初始化参数
+  1. 鼠标模式下的操作权限
+  2. 开启公式元素支持
+
+- 新增元素类型
+  1. 公式元素 TEDU_BOARD_ELEMENT_FORMULA，此功能需要设置开启公式元素支持 formulaEnable 为`true`。添加方式详见 添加白板元素中的 `示例8：添加一个公式元素`
+
+- 新增全局变量
+  1. 几何元素类型
+
+- 功能优化
+  1. 支持涂鸦点擦
+  2. 几何画板新增多种几何图形支持
+  3. 新增公式元素的支持
+  4. 优化视频加载播放逻辑
+  5. 图形涂鸦绘制实时同步显示
+  6. 优化ppt资源加载重试逻辑
+
+- Bug 修复
+  1. 互动白板宽高变化时滚动条抖动
+  2. 删除文件时远端ppt动画步数重置
+  3. 自定义图形高度为0时远端图形显示错误
+  4. 若干已知问题修复
+
 ### 2.6.3 @ 2021.06.28
 * 链接地址：https://res.qcloudtiw.com/board/2.6.3/TEduBoard.min.js
 

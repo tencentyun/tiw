@@ -1,3 +1,27 @@
+### 2.6.4.125 @ 2021.08.06
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.6.4.125.zip) 
+- 新增接口  
+  1. 设置几何图形类型(setMathGraphType)  
+  2. 鼠标模式下的操作权限(setMouseToolBehavior)  
+  3. 设置白板备注信息(setBoardRemark)  
+  4. 获取白板备注信息(getBoardRemark)  
+  5. 添加函数元素接口(addElement)  
+- 新增初始化参数   
+  1. 鼠标模式下的操作权限  mouseToolBehavior  
+  2. 开启公式元素支持 formulaEnable
+- 功能优化
+  1. 几何画板新增多种几何图形支持
+  2. 新增公式元素的支持
+  3. 优化视频加载播放逻辑
+  4. 图形涂鸦绘制实时同步显示
+  5. 优化ppt资源加载重试逻辑
+  6. 添加本地缓存，提高资源加载速度
+- Bug修复
+  1. 互动白板宽高变化时滚动条抖动
+  2. 删除文件时远端ppt动画步数重置
+  3. 自定义图形高度为0时远端图形显示错误
+  4. 若干已知问题修复
+
 ### 2.6.3.113 @ 2021.07.04
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.6.3.113.zip)    
 - 新增接口  
@@ -116,6 +140,9 @@
   4. 添加自定义元素时点选框范围错误
   5. 文本工具相关问题
   6. 其他若干已知问题
+  
+ 
+
 ### 2.5.6.85 @ 2020.12.14
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.6.85.zip)
 
@@ -126,11 +153,11 @@
         - 开启该功能 Mac 端在一些情况下会导致光标变成默认的鼠标指针，如消息弹窗等行为，属于正常现象。
     - 增加设置画笔和激光笔工具的提示语接口 setToolTypeTitle
     - 支持音频元素
-        - 新增音频 addElement
-        - 播放音频 playAudio
-        - 暂停音频 pauseAudio
-        - 跳转进度 seekAudio
-        - 是否启用音频控制面板 enableAudioControl
+        -新增音频 addElement
+        -播放音频 playAudio
+        -暂停音频 pauseAudio
+        -跳转进度 seekAudio
+        -是否启用音频控制面板 enableAudioControl
 - 新增特性：
     - 点选和框选工具合并
     - 激光笔和画笔支持多人
@@ -139,8 +166,8 @@
 
 ### 2.5.5.83 @ 2020.12.03 
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.5.5.83.zip)
-- Bug 修复   
-  - 修复 WebView 远程调试漏洞
+- Bug修复   
+  - 修复WebView远程调试漏洞
   - 替换日志模块，防止内存泄漏
 
 ### 2.5.5.71 @ 2020.11.09

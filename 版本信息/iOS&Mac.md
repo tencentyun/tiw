@@ -1,4 +1,39 @@
-### 2.6.3.211 @ 2021-07-05
+### 2.6.4.57 @ 2021-08-06
+* [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.6.4.57.zip)
+* [单击下载 SDK（macOS）](https://sdk.qcloudtiw.com/mac/TEduBoard_Mac_2.6.4.57.zip)
+
+
+- 新增接口
+    1.设置几何图形类型(setMathGraphType)，可用于几何画板绘制几何图形
+    2.鼠标模式下的操作权限(setMouseToolBehavior)
+    3.设置白板备注信息(setBoardRemark)
+    4.获取白板备注信息(getBoardRemark)
+    
+- 新增初始化参数
+    1.鼠标模式下的操作权限(mouseToolBehavior)
+    2.开启公式元素支持(formulaEnable)
+    
+- 新增元素类型
+    1.公式元素(TEDU_BOARD_ELEMENT_FORMULA)，此功能需要设置开启公式元素支持(formulaEnable)为true。
+
+- 新增全局变量
+    1.几何元素类型(TEduBoardMathGraphType)
+    
+- 功能优化
+    1.几何画板新增多种几何图形支持
+    2.新增公式元素的支持
+    3.优化视频加载播放逻辑
+    4.图形涂鸦绘制实时同步显示
+    5.优化ppt资源加载重试逻辑
+    6.添加本地缓存，提高资源加载速度
+    
+- Bug修复
+    1.互动白板宽高变化时滚动条抖动
+    2.删除文件时远端ppt动画步数重置
+    3.自定义图形高度为0时远端图形显示错误
+    4.若干已知问题修复
+
+### 2.6.3.42 @ 2021-07-05
 * [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.6.3.42.zip)
 * [单击下载 SDK（macOS）](https://sdk.qcloudtiw.com/mac/TEduBoard_Mac_2.6.3.42.zip)
 
