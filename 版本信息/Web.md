@@ -1,5 +1,23 @@
+### 2.6.4 @ 2021.08.16
+* 链接地址：https://res.qcloudtiw.com/board/2.6.4/TEduBoard.min.js
+
+- 新增分组模式
+    1. 添加白板到分组  addBoardToClassGroup
+    2. 添加用户到分组 addUserToClassGroup
+    3. 获取所有分组id getAllClassGroupIds
+    4. 获取分组模式状态 getClassGroupEnable
+    5. 获取用户所在的分组 getClassGroupIdByUserId
+    6. 获取分组信息 getClassGroupInfoByGroupId
+    7. 分组内跳转 gotoClassGroupBoard
+    8. 从分组中移除白板 removeBoardInClassGroup
+    9. 删除分组 removeClassGroup
+    10. 从分组中移除用户 removeUserInClassGroup
+    11. 重置所有分组 resetClassGroup
+    12. 设置分组 setClassGroup
+    13. 开启分组模式 setClassGroupEnable
+    14. 设置分组标题 setClassGroupTitle
 ### 2.6.4 @ 2021.08.06
-* 链接地址：[https://res.qcloudtiw.com/board/2.6.4/TEduBoard.min.js]()
+* 链接地址：https://res.qcloudtiw.com/board/2.6.4/TEduBoard.min.js
 
 - 新增接口
   1. 设置几何图形类型 setMathGraphType，可用于几何画板绘制几何图形

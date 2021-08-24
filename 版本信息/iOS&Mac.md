@@ -1,3 +1,25 @@
+### 2.6.4.61 @ 2021-08-16
+* [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.6.4.61.zip)
+* [单击下载 SDK（macOS）](https://sdk.qcloudtiw.com/mac/TEduBoard_Mac_2.6.4.61.zip)
+
+- 新增接口
+    1. 增加白板(addBoard)，可选择不跳转到新增的白板
+    2. 分组模式功能
+        1. 开启分组模式(setClassGroupEnable)
+        2. 设置分组(setClassGroup)
+        3. 设置分组标题(setClassGroupTitle)
+        4. 重置所有分组(resetClassGroup)
+        5. 获取所有分组id(getAllClassGroupIds)
+        6. 获取分组模式状态(getClassGroupEnable)
+        7. 获取用户所在的分组(getClassGroupIdByUserId)
+        8. 获取分组信息(getClassGroupInfoByGroupId)
+        9. 从分组中移除白板(removeBoardInClassGroup)
+        10. 从分组中移除用户(removeUserInClassGroup)
+        11. 删除分组(removeClassGroup)
+        12. 添加白板到分组(addBoardToClassGroup)
+        13. 添加用户到分组(addUserToClassGroup)
+        14. 分组内跳转(gotoClassGroupBoard)
+
 ### 2.6.4.57 @ 2021-08-06
 * [单击下载 SDK（iOS）](https://sdk.qcloudtiw.com/ios/TEduBoard_2.6.4.57.zip)
 * [单击下载 SDK（macOS）](https://sdk.qcloudtiw.com/mac/TEduBoard_Mac_2.6.4.57.zip)
