@@ -49,7 +49,7 @@ pod 命令执行完后，会生成集成了 SDK 的 .xcworkspace 后缀的工程
 
 
 ### 手动集成
-1. 前往 [版本信息](/版本信息/iOS & macOS.md)，下载 SDK。
+1. 前往 [版本信息](https://cloud.tencent.com/document/product/1137/43151)，下载 SDK。
 2. 前往 [即时通讯官网](https://cloud.tencent.com/document/product/269/36887) 下载 IMSDK。互动白板默认使用 IMSDK 作为信令通道，如果您有独立的信令通道，请跳过此步。
 3. 打开您的 Xcode 工程项目，选择要运行的 target ，选中 Build Phases 项。
 4. 单击 Link Binary with Libraries 项展开，单击底下的“+”号图标去添加依赖库。
