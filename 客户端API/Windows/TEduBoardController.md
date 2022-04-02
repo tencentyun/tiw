@@ -462,8 +462,8 @@ virtual void SendMouseWheelEvent(const TEduBoardMouseEvent &event, int deltaX, i
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
 | event | const TEduBoardMouseEvent & | 要发送的鼠标事件  |
-| deltaX | int | 滚轮在X方向的移动增量  |
-| deltaY | int | 滚轮在Y方向的移动增量  |
+| deltaX | int | 滚轮在 X 方向的移动增量  |
+| deltaY | int | 滚轮在 Y 方向的移动增量  |
 
 
 ### SendTouchEvent
@@ -811,11 +811,6 @@ virtual void Undo()=0
 virtual void Redo()=0
 ```
 
-### 
-重做当前白板页上一次撤销 
-``` C++
-virtual void Redo()=0
-```
 
 ### setScrollBarVisible
 设置白板滚动条是否可见 
@@ -842,7 +837,7 @@ virtual void setTextFontFamily(const char * fontFace)
 
 ### addTextFontFamily
 设置自定义字体
-`建议在创建白板实例后立刻调用;本地端和远端都需要设置字体样式，否则可能出现两端字体显示样式不同步`
+建议在创建白板实例后立刻调用；本地端和远端都需要设置字体样式，否则可能出现两端字体显示样式不同步
 ``` C++
 virtual void AddTextFontFamily(const char * 	fontFace, const char * 	fontUrl)
 ```
@@ -1281,7 +1276,7 @@ virtual void gotoStep(bool visible)
 
 | 参数 | 类型 | 含义 |
 | --- | --- | --- |
-| boardId | const char * | 白板id  |
+| boardId | const char * | 白板 ID  |
 | step | uint32_t | 动画步数 |
 
 ### getBoardScroll
