@@ -1,3 +1,8 @@
+### 2.7.2.165 @2022-04-07  
+* [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.7.2.165.zip)  
+- 接口调整  
+  TEduBoardErrorCode  增加一个枚举：TEDU_BOARD_MAX_BOARD_LIMITED = 10 ///单课堂内白板页数已经到达上限  
+
 ### 2.7.1.155 @2022-02-24  
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.7.1.155.zip)  
 - 新增类  
@@ -5,8 +10,7 @@
 - 新增接口  
   1. loadCustomResource 加载自定义资源  
 - 接口调整  
-  1. setSyncVideoStatusEnable 新增参数isAppActiveChange:只有在移动端在app切换前后台的时候需要调用。    
-  
+  1. setSyncVideoStatusEnable 新增参数isAppActiveChange:只有在移动端在app切换前后台的时候需要调用。 
 ### 2.6.9.145 @ 2021-12-31
 * [单击下载 SDK](https://sdk.qcloudtiw.com/android/TEduBoardSdk_2.6.9.145.zip)  
 
